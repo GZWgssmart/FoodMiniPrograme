@@ -16,13 +16,13 @@ import java.util.List;
 @Mapper
 public interface AppDao {
 
-    //门店列表
+    //小程序列表
     @SelectProvider(type = CommonProvide.class,method = "queryAppAll")
     List<App> queryAppAll(@Param("sidx") String sidx, @Param("sord") String sord,
                                            @Param("startnum") int startnum, @Param("endnum") int endnum, App app);
 
 
-    //门店列表
+    //小程序列表
     @SelectProvider(type = CommonProvide.class,method = "queryAppAllCount")
     int queryAppAllCount(App app);
 
