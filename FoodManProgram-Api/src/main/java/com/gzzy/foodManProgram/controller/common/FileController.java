@@ -36,6 +36,7 @@ public class FileController  {
 
 
     @RequestMapping(value = "/upload",method = RequestMethod.POST)
+    @ApiOperation(value = "上传图片视频",notes = "上传图片视频")
     public Object singleFileUpload(MultipartFile file) {
         AbstractOutputDto obj=new AbstractOutputDto();
         fileService.saveFile(file,1);
