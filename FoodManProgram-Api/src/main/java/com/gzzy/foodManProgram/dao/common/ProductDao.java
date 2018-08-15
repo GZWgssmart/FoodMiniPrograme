@@ -3,10 +3,7 @@ package com.gzzy.foodManProgram.dao.common;
 import com.gzzy.foodManProgram.dao.common.provide.CommonProvide;
 import com.gzzy.foodManProgram.entity.common.App;
 import com.gzzy.foodManProgram.entity.common.Product;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.SelectProvider;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -17,6 +14,7 @@ import java.util.List;
  * @Date 2018/8/15/015 12:50
  * @Version 1.0
  */
+@Mapper
 public interface ProductDao {
 
     //商品列表
