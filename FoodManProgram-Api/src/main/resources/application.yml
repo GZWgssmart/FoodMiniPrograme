@@ -50,9 +50,5 @@ spring:
             max-request-size: 10MB
             enabled: true
 
-    prop:
-      upload-folder:
-
-
 server:
     port: 9009

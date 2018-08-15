@@ -34,7 +34,7 @@ public class FileService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-   public ImgOutput saveFile(MultipartFile file, int aemtype) {
+   public String saveFile(MultipartFile file, int aemtype) {
        // 文件后缀
        String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
        //文件名称
@@ -54,26 +54,31 @@ public class FileService {
        if (!existfile2.exists()) {// 判断文件是否存在
            existfile2.mkdirs(); // 创建文件夹
        }
-
-
        String srcImgPath = "";
        String imgurl = "";
+       if (aemtype == 1) {
+           srcImgPath =  imgdirimagepath + File.separator+   "img" + "." + suffix;
+           imgurl = "img" + File.separator+  "img" + "." + suffix;
+       } else {
+           srcImgPath =  imgdirvideopath + File.separator + "video" + "." + suffix;
+           imgurl = "video" + File.separator+ "video" + "." + suffix;
+       }
+
+
 
        File record = new File(srcImgPath);
-       int picid = 0;
-       ImgOutput imgOutput = new ImgOutput();
        try {
            if(!record.exists()){
                record.createNewFile();
            }
            boolean flag =  HttpClientUtil.doUploadClientforfile(file.getBytes(), record);
            if(flag){//上传成功
-
+               return imgurl;
            }
        }catch (Exception e){
            e.printStackTrace();
        }
-        return imgOutput;
+        return "";
    }
 
 }
