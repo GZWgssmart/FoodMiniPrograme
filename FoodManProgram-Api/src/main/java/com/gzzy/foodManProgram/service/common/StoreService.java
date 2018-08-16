@@ -45,11 +45,11 @@ public class StoreService {
     }
 
 
-    public void insertApp(Store store) {
+    public void insertStore(Store store) {
         storeDao.insertStore(store);
     }
 
-    public void updateApp(Store store) {
+    public void updateStore(Store store) {
         storeDao.updateStore(store);
     }
 
@@ -67,6 +67,19 @@ public class StoreService {
         storeProductBean.setStore(store);
         storeProductBean.setProducts(products);
         obj.setData(storeProductBean);
+        return obj;
+    }
+
+    /**
+     *
+     * 功能描述: 根据storeid查询商品
+     * @auther: wangbin
+     * @date: 2018/8/16/016 16:46
+     */
+    public AbstractOutputDto queryStroeProductByid(Store store) {
+        AbstractOutputDto obj = new AbstractOutputDto();
+        List<Product> products =storeDao.queryStroeProductByid(store.getId());
+        obj.setDatalist(products);
         return obj;
     }
 

@@ -36,6 +36,7 @@ public interface ProductDao {
             " price," +
             " des," +
             " img," +
+            " imgdetail," +
             " appid," +
             " createtime) values " +
             "(#{id}," +
@@ -45,6 +46,7 @@ public interface ProductDao {
             " #{price}," +
             " #{des}," +
             " #{img}," +
+            " #{imgdetail}," +
             " #{appid}," +
             " now())")
     void insertProduct(Product product);
@@ -55,6 +57,7 @@ public interface ProductDao {
             " price = #{price}," +
             " des = #{des}," +
             " img = #{img}," +
+            " imgdetail = #{imgdetail}," +
             " appid = #{appid} where id = #{id}")
     void updateProduct(Product product);
 }

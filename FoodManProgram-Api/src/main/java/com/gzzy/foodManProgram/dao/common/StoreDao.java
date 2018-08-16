@@ -22,8 +22,10 @@ public interface StoreDao {
             " name, " +
             " address, " +
             " des," +
+            " longitude," +
+            " latitude," +
             " tel, " +
-            " log, " +
+            " logo, " +
             " video," +
             " appid," +
             " type," +
@@ -32,8 +34,10 @@ public interface StoreDao {
             " #{name}," +
             " #{address}," +
             " #{des}," +
+            " #{longitude}," +
+            " #{latitude}," +
             " #{tel}," +
-            " #{log}," +
+            " #{logo}," +
             " #{video}, " +
             " #{appid}, " +
             " #{type}," +
@@ -44,8 +48,10 @@ public interface StoreDao {
             " name = #{name}," +
             " address = #{address}," +
             " des = #{des}," +
+            " longitude = #{longitude}," +
+            " latitude = #{latitude}," +
             " tel = #{tel}," +
-            " log = #{log}," +
+            " logo = #{logo}," +
             " video = #{video}," +
             " appid = #{appid}," +
             " type = #{type} where id = #{id}")
@@ -79,4 +85,13 @@ public interface StoreDao {
      */
     @Select("select * from t_product where appid = #{appid}")
     List<Product> queryProductByAppId(@Param("appid") int appid);
+
+    /**
+     *
+     * 功能描述: 根据商家id查询商品
+     * @auther: wangbin
+     * @date: 2018/8/16/016 16:46
+     */
+    @Select("select * from t_product where sid = #{storeid}")
+    List<Product> queryStroeProductByid(@Param("storeid") int storeid);
 }

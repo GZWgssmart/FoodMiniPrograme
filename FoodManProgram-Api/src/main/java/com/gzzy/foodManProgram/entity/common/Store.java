@@ -16,12 +16,38 @@ public class Store {
     private String address;
     private String des;
     private String tel;
-    private String log;
+    private String logo;
     private String video;
     private int appid;
     private String type;
     private Date createtime;
     private String status;
+    private int longitude; //经度
+    private int latitude; //纬度
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    public int getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(int longitude) {
+        this.longitude = longitude;
+    }
+
+    public int getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(int latitude) {
+        this.latitude = latitude;
+    }
 
     public int getId() {
         return id;
@@ -63,13 +89,7 @@ public class Store {
         this.tel = tel;
     }
 
-    public String getLog() {
-        return log;
-    }
 
-    public void setLog(String log) {
-        this.log = log;
-    }
 
     public String getVideo() {
         return video;

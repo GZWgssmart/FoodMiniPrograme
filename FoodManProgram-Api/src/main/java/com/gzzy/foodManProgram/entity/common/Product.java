@@ -20,6 +20,15 @@ public class Product {
     private int appid;
     private Date createtime;
     private String status;
+    private String imgdetail; //长图
+
+    public String getImgdetail() {
+        return imgdetail;
+    }
+
+    public void setImgdetail(String imgdetail) {
+        this.imgdetail = imgdetail;
+    }
 
     public int getId() {
         return id;
