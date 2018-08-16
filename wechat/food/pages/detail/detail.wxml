@@ -1,0 +1,13 @@
+<view>
+  <view class="product">
+    <view>
+      <image src="{{product.headicon}}" class="product-image"></image> 
+    </view>
+    <view class="product-info">
+      <text>{{product.title}}</text>
+      <text>{{product.des}}</text>
+      <text>价格：￥{{product.price}}</text>
+    </view>
+  </view>
+  <image src="{{product.image}}" class="product-detail-image" mode="widthFix"></image>
+</view>

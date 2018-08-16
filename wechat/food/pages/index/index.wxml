@@ -1,0 +1,23 @@
+<view>
+  <view>
+    <image src="{{company.headicon}}" class="headicon"></image>
+  </view>
+  <view class="main-content">
+    <view>
+      <video wx:if="{{company.video != ''}}" src="{{company.video}}" controls class="video" autoplay></video>
+    </view>
+    <view>
+      <text>热门推荐</text>
+      <view wx:for="{{company.products}}" wx:key="{{item.id}}" class="product" data-productid="{{item.id}}" bindtap="showDetail">
+        <view>
+          <image src="{{item.headicon}}" class="product-image"></image> 
+        </view>
+        <view class="product-info">
+          <text>{{item.title}}</text>
+          <text>{{item.des}}</text>
+          <text>价格：￥{{item.price}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
