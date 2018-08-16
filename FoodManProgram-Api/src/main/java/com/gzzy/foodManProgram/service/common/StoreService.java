@@ -4,7 +4,9 @@ import com.gzzy.foodManProgram.dao.common.StoreDao;
 import com.gzzy.foodManProgram.dto.AbstractInputDto;
 import com.gzzy.foodManProgram.dto.AbstractOutputDto;
 import com.gzzy.foodManProgram.entity.common.App;
+import com.gzzy.foodManProgram.entity.common.Product;
 import com.gzzy.foodManProgram.entity.common.Store;
+import com.gzzy.foodManProgram.entity.common.StoreProductBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,5 +52,24 @@ public class StoreService {
     public void updateApp(Store store) {
         storeDao.updateStore(store);
     }
+
+    /**
+     *
+     * 功能描述: 根据appid查询商家信息和商品
+     * @auther: wangbin
+     * @date: 2018/8/16/016 16:46
+     */
+    public AbstractOutputDto queryStroeProductByAppid(App app) {
+        AbstractOutputDto obj = new AbstractOutputDto();
+        StoreProductBean storeProductBean = new StoreProductBean();
+        List<Product> products = storeDao.queryProductByAppId(app.getId());
+        Store store =storeDao.queryStoreByAppId(app.getId());
+        storeProductBean.setStore(store);
+        storeProductBean.setProducts(products);
+        obj.setData(obj);
+        storeDao.updateStore(store);
+        return obj;
+    }
+
 
 }

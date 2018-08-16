@@ -1,6 +1,7 @@
 package com.gzzy.foodManProgram.dao.common;
 
 import com.gzzy.foodManProgram.dao.common.provide.CommonProvide;
+import com.gzzy.foodManProgram.entity.common.Product;
 import com.gzzy.foodManProgram.entity.common.Store;
 import org.apache.ibatis.annotations.*;
 
@@ -59,4 +60,23 @@ public interface StoreDao {
     //门店列表
     @SelectProvider(type = CommonProvide.class,method = "queryAppAllCount")
     int queryStoreAllCount(Store store);
+
+    /**
+     *
+     * 功能描述: 根据appid查询商家
+     * @auther: wangbin
+     * @date: 2018/8/16/016 16:46
+     */
+    @Select("select * from t_store where appid = #{appid}")
+    Store queryStoreByAppId(@Param("appid") int appid);
+
+
+    /**
+     *
+     * 功能描述: 根据appid查询商品
+     * @auther: wangbin
+     * @date: 2018/8/16/016 16:46
+     */
+    @Select("select * from t_product where appid = #{appid}")
+    List<Product> queryProductByAppId(@Param("appid") int appid);
 }
