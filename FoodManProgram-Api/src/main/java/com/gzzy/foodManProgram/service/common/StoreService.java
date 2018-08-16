@@ -66,8 +66,7 @@ public class StoreService {
         Store store =storeDao.queryStoreByAppId(app.getId());
         storeProductBean.setStore(store);
         storeProductBean.setProducts(products);
-        obj.setData(obj);
-        storeDao.updateStore(store);
+        obj.setData(storeProductBean);
         return obj;
     }
 
