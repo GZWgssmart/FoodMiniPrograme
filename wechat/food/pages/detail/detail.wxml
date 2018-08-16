@@ -4,9 +4,9 @@
       <image src="{{product.headicon}}" class="product-image"></image> 
     </view>
     <view class="product-info">
-      <text>{{product.title}}</text>
-      <text>{{product.des}}</text>
-      <text>价格：￥{{product.price}}</text>
+      <text class="title">{{product.title}}</text>
+      <text class="des">{{product.des}}</text>
+      <text class="price">价格：￥{{product.price}}</text>
     </view>
   </view>
   <image src="{{product.image}}" class="product-detail-image" mode="widthFix"></image>

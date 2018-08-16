@@ -13,9 +13,9 @@
           <image src="{{item.headicon}}" class="product-image"></image> 
         </view>
         <view class="product-info">
-          <text>{{item.title}}</text>
-          <text>{{item.des}}</text>
-          <text>价格：￥{{item.price}}</text>
+          <text class="title">{{item.title}}</text>
+          <text class="des">{{item.des}}</text>
+          <text class="price">价格：￥{{item.price}}</text>
         </view>
       </view>
     </view>
