@@ -1,5 +1,6 @@
 package com.gzzy.foodManProgram.entity.common;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -14,7 +15,7 @@ public class Product {
     private int sid;
     private String name;
     private String title;
-    private float price;
+    private BigDecimal price;
     private String des;
     private String img;
     private int appid;
@@ -62,11 +63,11 @@ public class Product {
         this.title = title;
     }
 
-    public float getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

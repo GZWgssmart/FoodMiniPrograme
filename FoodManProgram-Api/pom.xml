@@ -220,6 +220,13 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.6</version>
 		</dependency>
+
+		<!--腾讯云点播 -->
+		<dependency>
+			<groupId>com.qcloud</groupId>
+			<artifactId>vod_api</artifactId>
+			<version>1.1.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
