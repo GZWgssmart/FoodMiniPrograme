@@ -1,7 +1,7 @@
 import env from './env'
 
 // 开发环境url地址
-const DEV_URL = 'https://www.easy-mock.com/mock/5add9213ce4d0e69998a6f51/iview-admin/'
+const DEV_URL = 'http://127.0.0.1'
 // 正式环境url地址
 const PRO_URL = 'https://produce.com'
 

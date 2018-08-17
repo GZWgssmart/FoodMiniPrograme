@@ -2,27 +2,60 @@
   <div>
     <Card>
       <tables ref="tables" editable searchable search-place="top" v-model="tableData" :columns="columns" @on-delete="handleDelete"/>
-      <Button style="margin: 10px 0;" type="primary" @click="exportExcel">导出为Csv文件</Button>
     </Card>
   </div>
 </template>
 
 <script>
-import Tables from '_c/tables'
-import { getTableData } from '@/api/data'
+import Tables from '_c/store'
+import { ajaxFun } from '@/api/common'
 export default {
-  name: 'tables_page',
+  name: 'store_page',
   components: {
     Tables
   },
   data () {
     return {
       columns: [
-        {title: 'Name', key: 'name', sortable: true},
-        {title: 'Email', key: 'email', editable: true},
-        {title: 'Create-Time', key: 'createTime'},
+        {title: '店铺类型', key: 'type', sortable: true},
+        {title: '名称', key: 'name', sortable: true},
+        {title: '地址', key: 'email', editable: true},
+        {title: '介绍', key: 'des', editable: true},
+        {title: '电话', key: 'tel', editable: true},
         {
-          title: 'Handle',
+          title: 'Logo',
+          key: 'log',
+          render: (h, params) => {
+      			const row = params.row;
+      			const url = row.log;
+      			return h('img', {
+      				attrs: {
+      					src: url
+      				},
+      				style: {
+      					width: "161.5px",
+      					height: "44px"
+      				}
+      			}, '');
+      		}
+        },
+        {
+          title: '视频',
+          key: 'video',
+          render: (h, params) => {
+      			const row = params.row;
+      			const url = row.video;
+      			return h('a', {
+      				attrs: {
+      					href: url
+      				}
+      			}, url);
+      		}
+        },
+        {title: '状态', key: 'status', editable: false, sortable: true},
+        {title: '添加时间', key: 'createtime', sortable: true},
+        {
+          title: '操作',
           key: 'handle',
           options: ['delete'],
           button: [
@@ -38,28 +71,24 @@ export default {
                     vm.$emit('input', params.tableData.filter((item, index) => index !== params.row.initRowIndex))
                   }
                 }
-              }, [
-                h('Button', '自定义删除')
-              ])
+              })
             }
           ]
         }
       ],
-      tableData: []
+      tableData: [],
+      pageUrl: ''
     }
   },
   methods: {
     handleDelete (params) {
       console.log(params)
-    },
-    exportExcel () {
-      this.$refs.tables.exportCsv({
-        filename: `table-${(new Date()).valueOf()}.csv`
-      })
     }
   },
   mounted () {
-    getTableData().then(res => {
+    const url = this.pageUrl;
+    const param = "";
+    ajaxFun(url, param, 'post').then(res => {
       this.tableData = res.data
     })
   }

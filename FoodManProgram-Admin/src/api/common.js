@@ -1,4 +1,4 @@
-import fetch from '@/libs/axios'
+import axios from '@/libs/axios'
 
 
 /**
@@ -11,9 +11,16 @@ export function ajaxFun(url,params,type){
   if(type == null) {
     type = 'post';
   }
-  return fetch({
-    url : url,
-    method : type,
-    data : params
-  })
+  if (type == "get") {
+    return axios.request({
+      url: url,
+      method: 'get'
+    })
+  } else {
+    return axios.request({
+      url: url,
+      params,
+      method: 'post'
+    })
+  }
 }
