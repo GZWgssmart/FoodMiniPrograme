@@ -15,16 +15,7 @@ public class MyWebAppConfigurer extends WebMvcConfigurerAdapter {
 	@Autowired
 	private TokenService tokenService;
 //
-	@Bean
-	MyInterceptor myInterceptor() {
-		return new MyInterceptor(tokenService);
-	}
 
-
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(myInterceptor()).addPathPatterns("/**").excludePathPatterns("/customers/login","/customers/autopartsClientLogin","/customers/autopartsAccountLogin","/users/login","/error","/files/preview");
-	}
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry)
