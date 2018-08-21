@@ -58,13 +58,13 @@ public interface StoreDao {
     void updateStore(Store store);
 
     //门店列表
-    @SelectProvider(type = CommonProvide.class,method = "queryAppAll")
+    @SelectProvider(type = CommonProvide.class,method = "queryStoreAll")
     List<Store> queryStoreAll(@Param("sidx") String sidx, @Param("sord") String sord,
                               @Param("startnum") int startnum, @Param("endnum") int endnum, Store store);
 
 
     //门店列表
-    @SelectProvider(type = CommonProvide.class,method = "queryAppAllCount")
+    @SelectProvider(type = CommonProvide.class,method = "queryStoreAllCount")
     int queryStoreAllCount(Store store);
 
     /**
