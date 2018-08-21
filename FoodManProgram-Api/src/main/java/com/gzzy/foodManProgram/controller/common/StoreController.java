@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("/store")
+@RequestMapping("/food-program/store")
 public class StoreController {
 
     @Autowired

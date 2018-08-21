@@ -22,7 +22,7 @@ import java.util.List;
  * @Version 1.0
  */
 @RestController
-@RequestMapping("/app")
+@RequestMapping("/food-program/app")
 public class AppController {
 
     @Autowired
