@@ -27,7 +27,7 @@ import java.util.Objects;
 
 
 @RestController
-@RequestMapping("/food-program/files")
+@RequestMapping("/files")
 @CrossOrigin
 public class FileController  {
 

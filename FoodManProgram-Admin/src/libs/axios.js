@@ -7,7 +7,8 @@ class httpRequest {
   constructor () {
     this.options = {
       method: '',
-      url: ''
+      url: '',
+      data: ''
     }
     // 存储请求队列
     this.queue = {}
@@ -22,11 +23,14 @@ class httpRequest {
   interceptors (instance, url) {
     // 添加请求拦截器
     instance.interceptors.request.use(config => {
-      if (!config.url.includes('/users')) {
-        config.headers['x-access-token'] = Cookies.get(TOKEN_KEY)
-      }
+      // if (!config.url.includes('/users')) {
+      //   config.headers['x-access-token'] = Cookies.get(TOKEN_KEY)
+      // }
       // Spin.show()
       // 在发送请求之前做些什么
+      if (config.method === 'post') {
+        config.data = config.data
+      }
       return config
     }, error => {
       // 对请求错误做些什么

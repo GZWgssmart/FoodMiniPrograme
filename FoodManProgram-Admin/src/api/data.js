@@ -1,4 +1,5 @@
 import axios from '@/libs/api.request'
+import * as url from './urls.js'
 
 export const getTableData = () => {
   return axios.request({
@@ -7,12 +8,19 @@ export const getTableData = () => {
   })
 }
 
-/**
-* 获取店铺表格数据
-*/
+// 获取店铺表格数据
 export const getStoreList = () => {
   return axios.request({
-    url: '/store/queryAppAll',
+    url: url.storeUrlPath.pageUrl,
+    method: 'post'
+  })
+}
+
+// 获取商品表格数据
+export const getProductList = () => {
+  return axios.request({
+    url: url.productUrlPath.pageUrl,
+    data: url.productParam,
     method: 'post'
   })
 }

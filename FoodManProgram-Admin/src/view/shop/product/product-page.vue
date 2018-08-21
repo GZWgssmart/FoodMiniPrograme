@@ -2,29 +2,31 @@
   <div>
     <Card>
       <tables ref="tables" editable searchable search-place="top" v-model="tableData" :columns="columns" @on-delete="handleDelete"/>
-      <Button style="margin: 10px 0;" type="primary" @click="exportExcel">导出为Csv文件</Button>
     </Card>
   </div>
 </template>
 
 <script>
 import Tables from '_c/tables'
-import { getTableData } from '@/api/data'
+import { getProductList } from '@/api/data'
 export default {
-  name: 'tables_page',
+  name: 'product-page',
   components: {
     Tables
   },
   data () {
     return {
       columns: [
-        {title: 'Name', key: 'name', sortable: true},
-        {title: 'Email', key: 'email', editable: true},
-        {title: 'Create-Time', key: 'createTime'},
+        {title: '小程序', key: 'appid', sortable: true},
+        {title: '门店', key: 'sid', sortable: true},
+        {title: '商品名称', key: 'name', editable: true, sortable: true},
+        {title: '商品标题', key: 'title', editable: true, sortable: true},
+        {title: '价格', key: 'price', editable: true, sortable: true},
+        {title: '描述', key: 'des', editable: true},
+        {title: '状态', key: 'status', sortable: true},
         {
-          title: 'Handle',
+          title: '操作',
           key: 'handle',
-          options: ['delete'],
           button: [
             (h, params, vm) => {
               return h('Poptip', {
@@ -51,16 +53,16 @@ export default {
   methods: {
     handleDelete (params) {
       console.log(params)
-    },
-    exportExcel () {
-      this.$refs.tables.exportCsv({
-        filename: `table-${(new Date()).valueOf()}.csv`
-      })
     }
   },
   mounted () {
-    getTableData().then(res => {
-      this.tableData = res.data
+    getProductList().then(res => {
+      console.log(res.data)
+      // if (res.data.status == '0') {
+      //   // 请求成功
+      // } else {
+      //   Message.error(res.data.msg)
+      // }
     })
   }
 }
