@@ -1,7 +1,9 @@
 package com.gzzy.foodManProgram.controller.common;
 
 import com.alibaba.fastjson.JSON;
+import com.gzzy.foodManProgram.common.ImgUrl;
 import com.gzzy.foodManProgram.dto.AbstractOutputDto;
+import com.gzzy.foodManProgram.entity.common.Img;
 import com.gzzy.foodManProgram.service.common.FileService;
 import com.gzzy.foodManProgram.util.Util;
 import io.swagger.annotations.Api;
@@ -37,9 +39,10 @@ public class FileController  {
 
     @RequestMapping(value = "/upload",method = RequestMethod.POST)
     @ApiOperation(value = "上传图片视频",notes = "上传图片视频")
-    public Object singleFileUpload(MultipartFile file) {
+    public AbstractOutputDto singleFileUpload(MultipartFile file) {
         AbstractOutputDto obj=new AbstractOutputDto();
-        fileService.saveFile(file,1);
+        Img img = fileService.saveFile(file);
+        obj.setData(img);
         obj.setStatus(0);
         obj.setMsg("上传成功");
         return obj;

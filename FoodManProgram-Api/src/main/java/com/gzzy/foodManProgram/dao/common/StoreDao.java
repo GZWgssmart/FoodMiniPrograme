@@ -94,4 +94,23 @@ public interface StoreDao {
      */
     @Select("select * from t_product where sid = #{storeid}")
     List<Product> queryStroeProductByid(@Param("storeid") int storeid);
+
+
+    /**
+     *
+     * 功能描述: 禁用
+     * @auther: wangbin
+     * @date: 2018/8/22/022 15:47
+     */
+    @Update("update t_store set status = '禁用' where id = #{id}")
+    void disable(@Param("id") int id);
+
+    /**
+     *
+     * 功能描述: 启用
+     * @auther: wangbin
+     * @date: 2018/8/22/022 15:47
+     */
+    @Update("update t_store set status = '启用' where id = #{id}")
+    void enabled(@Param("id") int id);
 }

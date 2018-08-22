@@ -7,6 +7,7 @@ import com.gzzy.foodManProgram.entity.common.App;
 import com.gzzy.foodManProgram.entity.common.Product;
 import com.gzzy.foodManProgram.entity.common.Store;
 import com.gzzy.foodManProgram.entity.common.StoreProductBean;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -81,6 +82,25 @@ public class StoreService {
         List<Product> products =storeDao.queryStroeProductByid(store.getId());
         obj.setDatalist(products);
         return obj;
+    }
+
+    /**
+     *
+     * 功能描述: 启用禁用
+     * @auther: wangbin
+     * @date: 2018/8/22/022 15:53
+     */
+    public void enableddisable(Store store) {
+        if(store != null) {
+            if (StringUtils.isNotEmpty(store.getStatus())) {
+                if (store.getStatus().equals("禁用")) {
+                    storeDao.enabled(store.getId());
+                }else {
+                    storeDao.disable(store.getId());
+                }
+            }
+        }
+
     }
 
 

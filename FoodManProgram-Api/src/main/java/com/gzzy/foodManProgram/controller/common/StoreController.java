@@ -3,6 +3,7 @@ package com.gzzy.foodManProgram.controller.common;
 import com.gzzy.foodManProgram.dto.AbstractInputDto;
 import com.gzzy.foodManProgram.dto.AbstractOutputDto;
 import com.gzzy.foodManProgram.entity.common.App;
+import com.gzzy.foodManProgram.entity.common.Product;
 import com.gzzy.foodManProgram.entity.common.Store;
 import com.gzzy.foodManProgram.service.common.StoreService;
 import io.swagger.annotations.ApiOperation;
@@ -69,6 +70,15 @@ public class StoreController {
     public AbstractOutputDto queryStroeProductByid(@ApiParam(name="根据商铺id查询商品",value = "传入JSON格式") @RequestBody Store store){
         AbstractOutputDto obj = new AbstractOutputDto();
         obj = storeService.queryStroeProductByid(store);
+        obj.setStatus(0);
+        return obj;
+    }
+
+    @RequestMapping(value = "/enableddisable",method = RequestMethod.POST)
+    @ApiOperation(value = "启用禁用商铺",notes = "启用禁用商铺")
+    public AbstractOutputDto enableddisable(@ApiParam(name="启用禁用商铺",value = "传入JSON格式") @RequestBody Store store){
+        AbstractOutputDto obj = new AbstractOutputDto();
+        storeService.enableddisable(store);
         obj.setStatus(0);
         return obj;
     }

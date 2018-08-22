@@ -53,4 +53,13 @@ public class ProductContrller {
         obj.setMsg("修改成功");
         return obj;
     }
+
+    @RequestMapping(value = "/enableddisable",method = RequestMethod.POST)
+    @ApiOperation(value = "启用禁用商品",notes = "启用禁用修改商品")
+    public AbstractOutputDto enableddisable(@ApiParam(name="启用禁用修改商品",value = "传入JSON格式") @RequestBody Product product){
+        AbstractOutputDto obj = new AbstractOutputDto();
+        productService.enableddisable(product);
+        obj.setStatus(0);
+        return obj;
+    }
 }

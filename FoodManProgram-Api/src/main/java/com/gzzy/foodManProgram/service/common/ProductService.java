@@ -5,6 +5,7 @@ import com.gzzy.foodManProgram.dto.AbstractInputDto;
 import com.gzzy.foodManProgram.dto.AbstractOutputDto;
 import com.gzzy.foodManProgram.entity.common.Product;
 import com.gzzy.foodManProgram.entity.common.Store;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,5 +50,24 @@ public class ProductService {
 
     public void updateProduct(Product product) {
         productDao.updateProduct(product);
+    }
+
+
+    /**
+     *
+     * 功能描述: 启用禁用
+     * @auther: wangbin
+     * @date: 2018/8/22/022 15:53
+     */
+    public void enableddisable(Product product) {
+        if(product != null) {
+            if (StringUtils.isNotEmpty(product.getStatus())) {
+                if (product.getStatus().equals("禁用")) {
+                    productDao.enabled(product.getId());
+                }else {
+                    productDao.disable(product.getId());
+                }
+            }
+        }
     }
 }
