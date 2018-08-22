@@ -59,7 +59,7 @@ public class CommonProvide {
     public String queryStoreAll(@Param("sidx") String sidx, @Param("sord") String sord,
                                 @Param("startnum") int startnum, @Param("endnum") int endnum, Store store){
         StringBuilder sql=new StringBuilder();
-        sql.append(" select s.*, a.name as appname from t_store s left join t_app a on a.id = s.appid where 1=1  and s.status = '启用'");
+        sql.append(" select s.*, a.name as appname from t_store s left join t_app a on a.id = s.appid where 1=1 ");
 
         if(!Objects.isNull(store.getName())&&!"".equals(store.getName())){
             sql.append(" and s.name like '%").append(store.getName()).append("%'");
@@ -76,7 +76,7 @@ public class CommonProvide {
 
     public String queryStoreAllCount(Store store){
         StringBuilder sql=new StringBuilder();
-        sql.append(" select count(s.id) from t_store s left join t_app a on a.id = s.appid where 1=1 and s.status = '启用'");
+        sql.append(" select count(s.id) from t_store s left join t_app a on a.id = s.appid where 1=1 ");
 
         if(!Objects.isNull(store.getName())&&!"".equals(store.getName())){
             sql.append(" and s.name like '%").append(store.getName()).append("%'");
@@ -90,7 +90,7 @@ public class CommonProvide {
     public String queryProductAll(@Param("sidx") String sidx, @Param("sord") String sord,
                                 @Param("startnum") int startnum, @Param("endnum") int endnum, Product product){
         StringBuilder sql=new StringBuilder();
-        sql.append(" select a.name as appname,s.name as storename, p.* from t_product p left join t_store s on p.sid = s.id left join t_app a on a.id = p.appid  where 1=1 and p.status = '启用'");
+        sql.append(" select a.name as appname,s.name as storename, p.* from t_product p left join t_store s on p.sid = s.id left join t_app a on a.id = p.appid  where 1=1 ");
 
         if(!Objects.isNull(product.getName())&&!"".equals(product.getName())){
             sql.append(" and p.name like '%").append(product.getName()).append("%'");
@@ -107,7 +107,7 @@ public class CommonProvide {
 
     public String queryProductAllCount(Product product){
         StringBuilder sql=new StringBuilder();
-        sql.append(" select count(p.id) from t_product p left join t_store s on p.sid = s.id left join t_app a on a.id = p.appid  where 1=1 and p.status = '启用'");
+        sql.append(" select count(p.id) from t_product p left join t_store s on p.sid = s.id left join t_app a on a.id = p.appid  where 1=1");
 
         if(!Objects.isNull(product.getName())&&!"".equals(product.getName())){
             sql.append(" and p.name like '%").append(product.getName()).append("%'");
