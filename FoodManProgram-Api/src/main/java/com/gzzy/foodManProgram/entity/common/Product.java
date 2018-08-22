@@ -23,6 +23,25 @@ public class Product {
     private String status;
     private String imgdetail; //长图
 
+    private String appname;
+    private String storename;
+
+    public String getAppname() {
+        return appname;
+    }
+
+    public void setAppname(String appname) {
+        this.appname = appname;
+    }
+
+    public String getStorename() {
+        return storename;
+    }
+
+    public void setStorename(String storename) {
+        this.storename = storename;
+    }
+
     public String getImgdetail() {
         return imgdetail;
     }

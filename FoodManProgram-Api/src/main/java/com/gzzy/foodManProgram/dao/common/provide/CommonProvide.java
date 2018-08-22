@@ -90,15 +90,15 @@ public class CommonProvide {
     public String queryProductAll(@Param("sidx") String sidx, @Param("sord") String sord,
                                 @Param("startnum") int startnum, @Param("endnum") int endnum, Product product){
         StringBuilder sql=new StringBuilder();
-        sql.append(" select * from t_product where 1=1");
+        sql.append(" select a.name as appname,s.name as storename, p.* from t_product p left join t_store s on p.sid = s.id left join t_app a on a.id = p.appid  where 1=1 ");
 
         if(!Objects.isNull(product.getName())&&!"".equals(product.getName())){
-            sql.append(" and name like '%").append(product.getName()).append("%'");
+            sql.append(" and p.name like '%").append(product.getName()).append("%'");
         }
         if(!Util.isEmpty(sidx)&&!Util.isEmpty(sord)){
             sql.append(" order by ").append(sidx).append(" ").append(sord);
         }else{
-            sql.append(" order by createtime desc ");
+            sql.append(" order by p.createtime desc ");
         }
         sql.append(" limit ").append(startnum+" , ").append(endnum);
         logger.info(sql.toString());
@@ -107,10 +107,10 @@ public class CommonProvide {
 
     public String queryProductAllCount(Product product){
         StringBuilder sql=new StringBuilder();
-        sql.append(" select count(*) from t_product where 1=1");
+        sql.append(" select count(p.id) from t_product p left join t_store s on p.sid = s.id left join t_app a on a.id = p.appid  where 1=1 ");
 
         if(!Objects.isNull(product.getName())&&!"".equals(product.getName())){
-            sql.append(" and name like '%").append(product.getName()).append("%'");
+            sql.append(" and p.name like '%").append(product.getName()).append("%'");
         }
 
         logger.info(sql.toString());
