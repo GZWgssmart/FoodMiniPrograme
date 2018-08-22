@@ -25,6 +25,16 @@ public class Store {
     private int longitude; //经度
     private int latitude; //纬度
 
+    private String appname;
+
+    public String getAppname() {
+        return appname;
+    }
+
+    public void setAppname(String appname) {
+        this.appname = appname;
+    }
+
     public String getLogo() {
         return logo;
     }

@@ -59,15 +59,15 @@ public class CommonProvide {
     public String queryStoreAll(@Param("sidx") String sidx, @Param("sord") String sord,
                                 @Param("startnum") int startnum, @Param("endnum") int endnum, Store store){
         StringBuilder sql=new StringBuilder();
-        sql.append(" select * from t_store where 1=1");
+        sql.append(" select s.*, a.name as appname from t_store s left join t_app a on a.id = s.appid where 1=1");
 
         if(!Objects.isNull(store.getName())&&!"".equals(store.getName())){
-            sql.append(" and name like '%").append(store.getName()).append("%'");
+            sql.append(" and s.name like '%").append(store.getName()).append("%'");
         }
         if(!Util.isEmpty(sidx)&&!Util.isEmpty(sord)){
             sql.append(" order by ").append(sidx).append(" ").append(sord);
         }else{
-            sql.append(" order by createtime desc ");
+            sql.append(" order by s.createtime desc ");
         }
         sql.append(" limit ").append(startnum+" , ").append(endnum);
         logger.info(sql.toString());
@@ -76,10 +76,10 @@ public class CommonProvide {
 
     public String queryStoreAllCount(Store store){
         StringBuilder sql=new StringBuilder();
-        sql.append(" select count(*) from t_store where 1=1");
+        sql.append(" select count(s.id) from t_store s left join t_app a on a.id = s.appid where 1=1");
 
         if(!Objects.isNull(store.getName())&&!"".equals(store.getName())){
-            sql.append(" and name like '%").append(store.getName()).append("%'");
+            sql.append(" and s.name like '%").append(store.getName()).append("%'");
         }
 
         logger.info(sql.toString());

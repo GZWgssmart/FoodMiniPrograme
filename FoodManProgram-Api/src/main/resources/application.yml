@@ -11,9 +11,9 @@ spring:
     datasource:
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.jdbc.Driver
-        url: jdbc:mysql://127.0.0.1:3306/foodprograme?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull
-        username: root
-        password: 123456
+        url: jdbc:mysql://handlecar.mysql.rds.aliyuncs.com:3306/basfcatalysts?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull
+        username: basfcatalystsusr
+        password: Basfcatalystsusr123
 
 # 下面为连接池的补充设置，应用到上面所有数据源中
 # 初始化大小，最小，最大
