@@ -2,6 +2,7 @@ package com.gzzy.foodManProgram.controller.common;
 
 import com.gzzy.foodManProgram.dto.AbstractInputDto;
 import com.gzzy.foodManProgram.dto.AbstractOutputDto;
+import com.gzzy.foodManProgram.dto.ProductDto;
 import com.gzzy.foodManProgram.entity.common.Product;
 import com.gzzy.foodManProgram.service.common.ProductService;
 import io.swagger.annotations.ApiOperation;
@@ -28,7 +29,7 @@ public class ProductContrller {
 
     @RequestMapping(value = "/queryProductAll",method = RequestMethod.POST)
     @ApiOperation(value = "查询商品",notes = "查询商品")
-    public AbstractOutputDto queryUser(@ApiParam(name="查询商品",value = "传入JSON格式") @RequestBody AbstractInputDto<Product> parmeter){
+    public AbstractOutputDto queryUser(@ApiParam(name="查询商品",value = "传入JSON格式") @RequestBody AbstractInputDto<ProductDto> parmeter){
         AbstractOutputDto obj = new AbstractOutputDto();
         obj = productService.queryProductAll(parmeter);
         return obj;

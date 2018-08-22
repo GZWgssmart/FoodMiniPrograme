@@ -1,6 +1,7 @@
 package com.gzzy.foodManProgram.dao.common;
 
 import com.gzzy.foodManProgram.dao.common.provide.CommonProvide;
+import com.gzzy.foodManProgram.dto.StoreDto;
 import com.gzzy.foodManProgram.entity.common.Product;
 import com.gzzy.foodManProgram.entity.common.Store;
 import com.gzzy.foodManProgram.entity.common.bean.ValueLabel;
@@ -61,12 +62,12 @@ public interface StoreDao {
     //门店列表
     @SelectProvider(type = CommonProvide.class,method = "queryStoreAll")
     List<Store> queryStoreAll(@Param("sidx") String sidx, @Param("sord") String sord,
-                              @Param("startnum") int startnum, @Param("endnum") int endnum, Store store);
+                              @Param("startnum") int startnum, @Param("endnum") int endnum, StoreDto storeDto);
 
 
     //门店列表
     @SelectProvider(type = CommonProvide.class,method = "queryStoreAllCount")
-    int queryStoreAllCount(Store store);
+    int queryStoreAllCount(StoreDto storeDto);
 
     /**
      *

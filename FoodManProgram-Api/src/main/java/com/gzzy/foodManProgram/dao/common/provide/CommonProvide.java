@@ -1,5 +1,7 @@
 package com.gzzy.foodManProgram.dao.common.provide;
 
+import com.gzzy.foodManProgram.dto.ProductDto;
+import com.gzzy.foodManProgram.dto.StoreDto;
 import com.gzzy.foodManProgram.entity.common.App;
 import com.gzzy.foodManProgram.entity.common.Product;
 import com.gzzy.foodManProgram.entity.common.Store;
@@ -8,6 +10,7 @@ import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
@@ -57,12 +60,28 @@ public class CommonProvide {
 
     //小程序app
     public String queryStoreAll(@Param("sidx") String sidx, @Param("sord") String sord,
-                                @Param("startnum") int startnum, @Param("endnum") int endnum, Store store){
+                                @Param("startnum") int startnum, @Param("endnum") int endnum, StoreDto storeDto){
         StringBuilder sql=new StringBuilder();
         sql.append(" select s.*, a.name as appname from t_store s left join t_app a on a.id = s.appid where 1=1 ");
 
-        if(!Objects.isNull(store.getName())&&!"".equals(store.getName())){
-            sql.append(" and s.name like '%").append(store.getName()).append("%'");
+        if(!Objects.isNull(storeDto.getName())&&!"".equals(storeDto.getName())){
+            sql.append(" and s.name like '%").append(storeDto.getName()).append("%'");
+        }
+
+        if(!Objects.isNull(storeDto.getTel())&&!"".equals(storeDto.getTel())){
+            sql.append(" and s.tel like '%").append(storeDto.getTel()).append("%'");
+        }
+
+        if (!Objects.isNull(storeDto.getAppid()) && storeDto.getAppid() > 0) {
+            sql.append(" and s.appid =  ").append(storeDto.getAppid());
+        }
+
+        if(!Objects.isNull(storeDto.getStatus())&&!"".equals(storeDto.getStatus())){
+            sql.append(" and s.status =  ").append(storeDto.getStatus());
+        }
+
+        if(!Objects.isNull(storeDto.getType())&&!"".equals(storeDto.getType())){
+            sql.append(" and s.type =  ").append(storeDto.getType());
         }
         if(!Util.isEmpty(sidx)&&!Util.isEmpty(sord)){
             sql.append(" order by ").append(sidx).append(" ").append(sord);
@@ -74,12 +93,28 @@ public class CommonProvide {
         return sql.toString();
     }
 
-    public String queryStoreAllCount(Store store){
+    public String queryStoreAllCount(StoreDto storeDto){
         StringBuilder sql=new StringBuilder();
         sql.append(" select count(s.id) from t_store s left join t_app a on a.id = s.appid where 1=1 ");
 
-        if(!Objects.isNull(store.getName())&&!"".equals(store.getName())){
-            sql.append(" and s.name like '%").append(store.getName()).append("%'");
+        if(!Objects.isNull(storeDto.getName())&&!"".equals(storeDto.getName())){
+            sql.append(" and s.name like '%").append(storeDto.getName()).append("%'");
+        }
+
+        if(!Objects.isNull(storeDto.getTel())&&!"".equals(storeDto.getTel())){
+            sql.append(" and s.tel like '%").append(storeDto.getTel()).append("%'");
+        }
+
+        if (!Objects.isNull(storeDto.getAppid()) && storeDto.getAppid() > 0) {
+            sql.append(" and s.appid =  ").append(storeDto.getAppid());
+        }
+
+        if(!Objects.isNull(storeDto.getStatus())&&!"".equals(storeDto.getStatus())){
+            sql.append(" and s.status =  ").append(storeDto.getStatus());
+        }
+
+        if(!Objects.isNull(storeDto.getType())&&!"".equals(storeDto.getType())){
+            sql.append(" and s.type =  ").append(storeDto.getType());
         }
 
         logger.info(sql.toString());
@@ -88,12 +123,37 @@ public class CommonProvide {
 
     //商品app
     public String queryProductAll(@Param("sidx") String sidx, @Param("sord") String sord,
-                                @Param("startnum") int startnum, @Param("endnum") int endnum, Product product){
+                                @Param("startnum") int startnum, @Param("endnum") int endnum, ProductDto productDto){
         StringBuilder sql=new StringBuilder();
         sql.append(" select a.name as appname,s.name as storename, p.* from t_product p left join t_store s on p.sid = s.id left join t_app a on a.id = p.appid  where 1=1 ");
 
-        if(!Objects.isNull(product.getName())&&!"".equals(product.getName())){
-            sql.append(" and p.name like '%").append(product.getName()).append("%'");
+        if(!Objects.isNull(productDto.getName())&&!"".equals(productDto.getName())){
+            sql.append(" and p.name like '%").append(productDto.getName()).append("%'");
+        }
+
+        if(!Objects.isNull(productDto.getTitle())&&!"".equals(productDto.getTitle())){
+            sql.append(" and p.title like '%").append(productDto.getTitle()).append("%'");
+        }
+
+        if (!Objects.isNull(productDto.getAppid()) && productDto.getAppid() > 0) {
+            sql.append(" and p.appid =  ").append(productDto.getAppid());
+        }
+
+        if (!Objects.isNull(productDto.getSid()) && productDto.getSid() > 0) {
+            sql.append(" and p.sid =  ").append(productDto.getSid());
+        }
+
+        if(!Objects.isNull(productDto.getStatus())&&!"".equals(productDto.getStatus())){
+            sql.append(" and p.status =  ").append(productDto.getStatus());
+        }
+
+
+        if(productDto.getPricestart().compareTo(BigDecimal.ZERO)!=0){
+            sql.append(" and p.price >= ").append("'" + productDto.getPricestart() + "000000'  ");
+        }
+
+        if(productDto.getPriceend().compareTo(BigDecimal.ZERO)!=0){
+            sql.append(" and p.price <= ").append("'" + productDto.getPriceend() + "999999'  ");
         }
         if(!Util.isEmpty(sidx)&&!Util.isEmpty(sord)){
             sql.append(" order by ").append(sidx).append(" ").append(sord);
@@ -105,14 +165,40 @@ public class CommonProvide {
         return sql.toString();
     }
 
-    public String queryProductAllCount(Product product){
+    public String queryProductAllCount(ProductDto productDto){
         StringBuilder sql=new StringBuilder();
         sql.append(" select count(p.id) from t_product p left join t_store s on p.sid = s.id left join t_app a on a.id = p.appid  where 1=1");
 
-        if(!Objects.isNull(product.getName())&&!"".equals(product.getName())){
-            sql.append(" and p.name like '%").append(product.getName()).append("%'");
+
+
+        if(!Objects.isNull(productDto.getName())&&!"".equals(productDto.getName())){
+            sql.append(" and p.name like '%").append(productDto.getName()).append("%'");
         }
 
+        if(!Objects.isNull(productDto.getTitle())&&!"".equals(productDto.getTitle())){
+            sql.append(" and p.title like '%").append(productDto.getTitle()).append("%'");
+        }
+
+        if (!Objects.isNull(productDto.getAppid()) && productDto.getAppid() > 0) {
+            sql.append(" and p.appid =  ").append(productDto.getAppid());
+        }
+
+        if (!Objects.isNull(productDto.getSid()) && productDto.getSid() > 0) {
+            sql.append(" and p.sid =  ").append(productDto.getSid());
+        }
+
+        if(!Objects.isNull(productDto.getStatus())&&!"".equals(productDto.getStatus())){
+            sql.append(" and p.status =  ").append(productDto.getStatus());
+        }
+
+
+        if(productDto.getPricestart().compareTo(BigDecimal.ZERO)!=0){
+            sql.append(" and p.price >= ").append("'" + productDto.getPricestart() + "000000'  ");
+        }
+
+        if(productDto.getPriceend().compareTo(BigDecimal.ZERO)!=0){
+            sql.append(" and p.price <= ").append("'" + productDto.getPriceend() + "999999'  ");
+        }
         logger.info(sql.toString());
         return sql.toString();
     }

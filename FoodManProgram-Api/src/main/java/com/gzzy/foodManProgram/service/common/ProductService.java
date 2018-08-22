@@ -3,6 +3,7 @@ package com.gzzy.foodManProgram.service.common;
 import com.gzzy.foodManProgram.dao.common.ProductDao;
 import com.gzzy.foodManProgram.dto.AbstractInputDto;
 import com.gzzy.foodManProgram.dto.AbstractOutputDto;
+import com.gzzy.foodManProgram.dto.ProductDto;
 import com.gzzy.foodManProgram.entity.common.Product;
 import com.gzzy.foodManProgram.entity.common.Store;
 import com.gzzy.foodManProgram.entity.common.bean.ValueLabel;
@@ -25,7 +26,7 @@ public class ProductService {
     @Autowired
     private ProductDao productDao;
 
-    public AbstractOutputDto queryProductAll(AbstractInputDto<Product> parmeter) {
+    public AbstractOutputDto queryProductAll(AbstractInputDto<ProductDto> parmeter) {
         AbstractOutputDto abstractOutputDto=new AbstractOutputDto();
 
         int startnum=(parmeter.getPage()-1)*parmeter.getRows();
