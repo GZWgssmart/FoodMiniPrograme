@@ -34,7 +34,7 @@ public class StoreController {
 
     @RequestMapping(value = "/queryStoreAll",method = RequestMethod.POST)
     @ApiOperation(value = "查询商家",notes = "查询商家")
-    public AbstractOutputDto queryUser(@ApiParam(name="查询商家",value = "传入JSON格式") @RequestBody AbstractInputDto<StoreDto> parmeter){
+    public AbstractOutputDto queryStoreAll(@ApiParam(name="查询商家",value = "传入JSON格式") @RequestBody AbstractInputDto<StoreDto> parmeter){
         AbstractOutputDto obj = new AbstractOutputDto();
         obj = storeService.queryStoreAll(parmeter);
         return obj;
@@ -42,7 +42,7 @@ public class StoreController {
 
     @RequestMapping(value = "/addStore",method = RequestMethod.POST)
     @ApiOperation(value = "添加商家",notes = "添加商家")
-    public AbstractOutputDto addApp(@ApiParam(name="添加商家",value = "传入JSON格式") @RequestBody Store store){
+    public AbstractOutputDto addStore(@ApiParam(name="添加商家",value = "传入JSON格式") @RequestBody Store store){
         AbstractOutputDto obj = new AbstractOutputDto();
         storeService.insertStore(store);
         obj.setStatus(0);
@@ -52,7 +52,7 @@ public class StoreController {
 
     @RequestMapping(value = "/updateStore",method = RequestMethod.POST)
     @ApiOperation(value = "修改商家",notes = "修改商家")
-    public AbstractOutputDto updateApp(@ApiParam(name="修改商家",value = "传入JSON格式") @RequestBody Store store){
+    public AbstractOutputDto updateStore(@ApiParam(name="修改商家",value = "传入JSON格式") @RequestBody Store store){
         AbstractOutputDto obj = new AbstractOutputDto();
         storeService.updateStore(store);
         obj.setStatus(0);

@@ -63,25 +63,20 @@ public class CommonProvide {
                                 @Param("startnum") int startnum, @Param("endnum") int endnum, StoreDto storeDto){
         StringBuilder sql=new StringBuilder();
         sql.append(" select s.*, a.name as appname from t_store s left join t_app a on a.id = s.appid where 1=1 ");
-
         if(!Objects.isNull(storeDto.getName())&&!"".equals(storeDto.getName())){
             sql.append(" and s.name like '%").append(storeDto.getName()).append("%'");
         }
-
         if(!Objects.isNull(storeDto.getTel())&&!"".equals(storeDto.getTel())){
             sql.append(" and s.tel like '%").append(storeDto.getTel()).append("%'");
         }
-
         if (!Objects.isNull(storeDto.getAppid()) && storeDto.getAppid() > 0) {
             sql.append(" and s.appid =  ").append(storeDto.getAppid());
         }
-
         if(!Objects.isNull(storeDto.getStatus())&&!"".equals(storeDto.getStatus())){
-            sql.append(" and s.status =  ").append(storeDto.getStatus());
+            sql.append(" and s.status =  '").append(storeDto.getStatus()+ "'");
         }
-
         if(!Objects.isNull(storeDto.getType())&&!"".equals(storeDto.getType())){
-            sql.append(" and s.type =  ").append(storeDto.getType());
+            sql.append(" and s.type =  '").append(storeDto.getType()+ "'");
         }
         if(!Util.isEmpty(sidx)&&!Util.isEmpty(sord)){
             sql.append(" order by ").append(sidx).append(" ").append(sord);
@@ -110,11 +105,11 @@ public class CommonProvide {
         }
 
         if(!Objects.isNull(storeDto.getStatus())&&!"".equals(storeDto.getStatus())){
-            sql.append(" and s.status =  ").append(storeDto.getStatus());
+            sql.append(" and s.status =  '").append(storeDto.getStatus()+ "'");
         }
 
         if(!Objects.isNull(storeDto.getType())&&!"".equals(storeDto.getType())){
-            sql.append(" and s.type =  ").append(storeDto.getType());
+            sql.append(" and s.type =  '").append(storeDto.getType()+ "'");
         }
 
         logger.info(sql.toString());
@@ -144,16 +139,16 @@ public class CommonProvide {
         }
 
         if(!Objects.isNull(productDto.getStatus())&&!"".equals(productDto.getStatus())){
-            sql.append(" and p.status =  ").append(productDto.getStatus());
+            sql.append(" and p.status =  '").append(productDto.getStatus()+ "'");
         }
 
 
         if(productDto.getPricestart().compareTo(BigDecimal.ZERO)!=0){
-            sql.append(" and p.price >= ").append("'" + productDto.getPricestart() + "000000'  ");
+            sql.append(" and p.price >= ").append(  productDto.getPricestart() );
         }
 
         if(productDto.getPriceend().compareTo(BigDecimal.ZERO)!=0){
-            sql.append(" and p.price <= ").append("'" + productDto.getPriceend() + "999999'  ");
+            sql.append(" and p.price <= ").append(productDto.getPriceend() );
         }
         if(!Util.isEmpty(sidx)&&!Util.isEmpty(sord)){
             sql.append(" order by ").append(sidx).append(" ").append(sord);
@@ -188,16 +183,16 @@ public class CommonProvide {
         }
 
         if(!Objects.isNull(productDto.getStatus())&&!"".equals(productDto.getStatus())){
-            sql.append(" and p.status =  ").append(productDto.getStatus());
+            sql.append(" and p.status =  '").append(productDto.getStatus()+ "'");
         }
 
 
         if(productDto.getPricestart().compareTo(BigDecimal.ZERO)!=0){
-            sql.append(" and p.price >= ").append("'" + productDto.getPricestart() + "000000'  ");
+            sql.append(" and p.price >= ").append( productDto.getPricestart() );
         }
 
         if(productDto.getPriceend().compareTo(BigDecimal.ZERO)!=0){
-            sql.append(" and p.price <= ").append("'" + productDto.getPriceend() + "999999'  ");
+            sql.append(" and p.price <= ").append( productDto.getPriceend());
         }
         logger.info(sql.toString());
         return sql.toString();

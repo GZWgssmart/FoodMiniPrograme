@@ -30,12 +30,9 @@ public class StoreService {
 
     public AbstractOutputDto queryStoreAll(AbstractInputDto<StoreDto> parmeter) {
         AbstractOutputDto abstractOutputDto=new AbstractOutputDto();
-
         int startnum=(parmeter.getPage()-1)*parmeter.getRows();
         int endnum=parmeter.getPage()*parmeter.getRows();
-
         int totalrecords=storeDao.queryStoreAllCount(parmeter.getData());
-
         int totalpages=(totalrecords + parmeter.getRows()-1)/parmeter.getRows();
         abstractOutputDto.setCurrpage(parmeter.getPage());
         abstractOutputDto.setStatus(0);
