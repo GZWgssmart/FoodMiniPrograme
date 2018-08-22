@@ -142,14 +142,25 @@ public class CommonProvide {
             sql.append(" and p.status =  '").append(productDto.getStatus()+ "'");
         }
 
-
-        if(productDto.getPricestart().compareTo(BigDecimal.ZERO)!=0){
-            sql.append(" and p.price >= ").append(  productDto.getPricestart() );
+        if (!Objects.isNull(productDto.getPricestart())&&!"".equals(productDto.getPricestart())) {
+            BigDecimal pricestart=new BigDecimal( productDto.getPricestart());
+            if(pricestart.compareTo(BigDecimal.ZERO)!=0){
+                sql.append(" and p.price >= ").append( pricestart);
+            }
         }
 
-        if(productDto.getPriceend().compareTo(BigDecimal.ZERO)!=0){
-            sql.append(" and p.price <= ").append(productDto.getPriceend() );
+        if (!Objects.isNull(productDto.getPriceend())&&!"".equals(productDto.getPriceend())) {
+            BigDecimal priceend=new BigDecimal( productDto.getPriceend());
+            if(priceend.compareTo(BigDecimal.ZERO)!=0){
+                sql.append(" and p.price <= ").append(priceend);
+            }
         }
+
+
+
+
+
+
         if(!Util.isEmpty(sidx)&&!Util.isEmpty(sord)){
             sql.append(" order by ").append(sidx).append(" ").append(sord);
         }else{
@@ -187,12 +198,18 @@ public class CommonProvide {
         }
 
 
-        if(productDto.getPricestart().compareTo(BigDecimal.ZERO)!=0){
-            sql.append(" and p.price >= ").append( productDto.getPricestart() );
+        if (!Objects.isNull(productDto.getPricestart())&&!"".equals(productDto.getPricestart())) {
+            BigDecimal pricestart=new BigDecimal( productDto.getPricestart());
+            if(pricestart.compareTo(BigDecimal.ZERO)!=0){
+                sql.append(" and p.price >= ").append( pricestart);
+            }
         }
 
-        if(productDto.getPriceend().compareTo(BigDecimal.ZERO)!=0){
-            sql.append(" and p.price <= ").append( productDto.getPriceend());
+        if (!Objects.isNull(productDto.getPriceend())&&!"".equals(productDto.getPriceend())) {
+            BigDecimal priceend=new BigDecimal( productDto.getPriceend());
+            if(priceend.compareTo(BigDecimal.ZERO)!=0){
+                sql.append(" and p.price <= ").append(priceend);
+            }
         }
         logger.info(sql.toString());
         return sql.toString();

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+
 /**
  * @ClassName ProductContrller
  * @Description TODO
@@ -31,6 +33,7 @@ public class ProductContrller {
     @ApiOperation(value = "查询商品",notes = "查询商品")
     public AbstractOutputDto queryUser(@ApiParam(name="查询商品",value = "传入JSON格式") @RequestBody AbstractInputDto<ProductDto> parmeter){
         AbstractOutputDto obj = new AbstractOutputDto();
+
         obj = productService.queryProductAll(parmeter);
         return obj;
     }

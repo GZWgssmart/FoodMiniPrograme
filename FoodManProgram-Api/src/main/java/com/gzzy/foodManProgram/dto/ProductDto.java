@@ -15,8 +15,8 @@ public class ProductDto {
     private int sid;
     private String name;
     private String title;
-    private BigDecimal pricestart;
-    private BigDecimal priceend;
+    private String pricestart;
+    private String priceend;
     private int appid;
     private String status;
 
@@ -45,19 +45,19 @@ public class ProductDto {
         this.title = title;
     }
 
-    public BigDecimal getPricestart() {
+    public String getPricestart() {
         return pricestart;
     }
 
-    public void setPricestart(BigDecimal pricestart) {
+    public void setPricestart(String pricestart) {
         this.pricestart = pricestart;
     }
 
-    public BigDecimal getPriceend() {
+    public String getPriceend() {
         return priceend;
     }
 
-    public void setPriceend(BigDecimal priceend) {
+    public void setPriceend(String priceend) {
         this.priceend = priceend;
     }
 
