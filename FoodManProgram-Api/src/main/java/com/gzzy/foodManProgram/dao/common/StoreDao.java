@@ -3,6 +3,7 @@ package com.gzzy.foodManProgram.dao.common;
 import com.gzzy.foodManProgram.dao.common.provide.CommonProvide;
 import com.gzzy.foodManProgram.entity.common.Product;
 import com.gzzy.foodManProgram.entity.common.Store;
+import com.gzzy.foodManProgram.entity.common.bean.ValueLabel;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -113,4 +114,16 @@ public interface StoreDao {
      */
     @Update("update t_store set status = '启用' where id = #{id}")
     void enabled(@Param("id") int id);
+
+
+    /**
+     *
+     * 功能描述: 查询所有商家
+     * @auther: wangbin
+     * @date: 2018/8/22/022 17:09
+     */
+
+    @Select("select id as value, name as label from t_store where status = '启用'")
+    List<ValueLabel> queryStoreValueLabel();
+
 }

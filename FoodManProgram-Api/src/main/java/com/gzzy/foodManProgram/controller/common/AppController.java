@@ -3,6 +3,7 @@ package com.gzzy.foodManProgram.controller.common;
 import com.gzzy.foodManProgram.dto.AbstractInputDto;
 import com.gzzy.foodManProgram.dto.AbstractOutputDto;
 import com.gzzy.foodManProgram.entity.common.App;
+import com.gzzy.foodManProgram.entity.common.bean.ValueLabel;
 import com.gzzy.foodManProgram.service.common.AppService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -53,6 +54,15 @@ public class AppController {
         appService.updateApp(app);
         obj.setStatus(0);
         obj.setMsg("修改成功");
+        return obj;
+    }
+
+    @RequestMapping(value = "/queryAppValueLabel",method = RequestMethod.POST)
+    @ApiOperation(value = "查询所有小程序",notes = "查询所有小程序")
+    public AbstractOutputDto queryAppValueLabel(){
+        AbstractOutputDto obj = new AbstractOutputDto();
+        List<ValueLabel> valueLabels = appService.queryAppValueLabel();
+        obj.setDatalist(valueLabels);
         return obj;
     }
 }

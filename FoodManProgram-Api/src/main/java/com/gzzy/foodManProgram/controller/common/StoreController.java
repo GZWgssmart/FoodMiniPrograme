@@ -5,6 +5,7 @@ import com.gzzy.foodManProgram.dto.AbstractOutputDto;
 import com.gzzy.foodManProgram.entity.common.App;
 import com.gzzy.foodManProgram.entity.common.Product;
 import com.gzzy.foodManProgram.entity.common.Store;
+import com.gzzy.foodManProgram.entity.common.bean.ValueLabel;
 import com.gzzy.foodManProgram.service.common.StoreService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @ClassName StoreController
@@ -80,6 +83,15 @@ public class StoreController {
         AbstractOutputDto obj = new AbstractOutputDto();
         storeService.enableddisable(store);
         obj.setStatus(0);
+        return obj;
+    }
+
+    @RequestMapping(value = "/queryStoreValueLabel",method = RequestMethod.POST)
+    @ApiOperation(value = "查询所有商家",notes = "查询所有商家")
+    public AbstractOutputDto queryAppValueLabel(){
+        AbstractOutputDto obj = new AbstractOutputDto();
+        List<ValueLabel> valueLabels = storeService.queryStoreValueLabel();
+        obj.setDatalist(valueLabels);
         return obj;
     }
 }

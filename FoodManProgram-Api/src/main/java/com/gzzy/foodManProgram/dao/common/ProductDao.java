@@ -3,6 +3,7 @@ package com.gzzy.foodManProgram.dao.common;
 import com.gzzy.foodManProgram.dao.common.provide.CommonProvide;
 import com.gzzy.foodManProgram.entity.common.App;
 import com.gzzy.foodManProgram.entity.common.Product;
+import com.gzzy.foodManProgram.entity.common.bean.ValueLabel;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -78,6 +79,7 @@ public interface ProductDao {
      */
     @Update("update t_product set status = '启用' where id = #{id}")
     void enabled(@Param("id") int id);
+
 
 
 

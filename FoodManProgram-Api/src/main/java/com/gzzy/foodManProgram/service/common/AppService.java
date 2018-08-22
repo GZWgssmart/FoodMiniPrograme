@@ -4,6 +4,7 @@ import com.gzzy.foodManProgram.dao.common.AppDao;
 import com.gzzy.foodManProgram.dto.AbstractInputDto;
 import com.gzzy.foodManProgram.dto.AbstractOutputDto;
 import com.gzzy.foodManProgram.entity.common.App;
+import com.gzzy.foodManProgram.entity.common.bean.ValueLabel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,5 +51,16 @@ public class AppService {
 
     public void updateApp(App app) {
         appDao.updateApp(app);
+    }
+
+    /**
+     *
+     * 功能描述:查询
+     * @auther: wangbin
+     * @date: 2018/8/22/022 17:14
+     */
+    public List<ValueLabel> queryAppValueLabel() {
+        List<ValueLabel> valueLabels = appDao.queryAppValueLabel();
+        return valueLabels;
     }
 }

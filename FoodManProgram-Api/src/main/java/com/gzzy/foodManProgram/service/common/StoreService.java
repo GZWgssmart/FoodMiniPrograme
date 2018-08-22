@@ -7,6 +7,7 @@ import com.gzzy.foodManProgram.entity.common.App;
 import com.gzzy.foodManProgram.entity.common.Product;
 import com.gzzy.foodManProgram.entity.common.Store;
 import com.gzzy.foodManProgram.entity.common.StoreProductBean;
+import com.gzzy.foodManProgram.entity.common.bean.ValueLabel;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -93,7 +94,7 @@ public class StoreService {
     public void enableddisable(Store store) {
         if(store != null) {
             if (StringUtils.isNotEmpty(store.getStatus())) {
-                if (store.getStatus().equals("禁用")) {
+                if ("禁用".equals(store.getStatus())) {
                     storeDao.enabled(store.getId());
                 }else {
                     storeDao.disable(store.getId());
@@ -101,6 +102,17 @@ public class StoreService {
             }
         }
 
+    }
+
+    /**
+     *
+     * 功能描述:查询所有商家
+     * @auther: wangbin
+     * @date: 2018/8/22/022 17:14
+     */
+    public List<ValueLabel> queryStoreValueLabel() {
+        List<ValueLabel> valueLabels = storeDao.queryStoreValueLabel();
+        return valueLabels;
     }
 
 
