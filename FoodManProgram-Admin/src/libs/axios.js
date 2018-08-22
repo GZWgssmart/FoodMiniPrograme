@@ -7,8 +7,7 @@ class httpRequest {
   constructor () {
     this.options = {
       method: '',
-      url: '',
-      data: ''
+      url: ''
     }
     // 存储请求队列
     this.queue = {}
@@ -46,7 +45,7 @@ class httpRequest {
           // Spin.hide()
         }, 500)
       }
-      if (data.code !== 200) {
+      if (data.code !== 200 && data.status !== 0) {
         // 后端服务在个别情况下回报201，待确认
         if (data.code === 401) {
           Cookies.remove(TOKEN_KEY)
@@ -57,7 +56,7 @@ class httpRequest {
         }
         return false
       }
-      return data
+      return res
     }, (error) => {
       Message.error('服务内部错误')
       // 对响应错误做点什么
@@ -70,9 +69,9 @@ class httpRequest {
       baseURL: baseURL,
       // timeout: 2000,
       headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-        'X-URL-PATH': location.pathname
-      }
+        'Content-Type': 'application/json; charset=utf-8'
+      },
+      withCredentials: true
     }
     return Axios.create(conf)
   }
