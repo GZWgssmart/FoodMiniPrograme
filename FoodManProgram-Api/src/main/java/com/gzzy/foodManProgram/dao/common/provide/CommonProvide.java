@@ -220,10 +220,10 @@ public class CommonProvide {
     //小程序app
     public String queryAppValueLabel(ValueLableDto valueLableDto){
         StringBuilder sql=new StringBuilder();
-        sql.append(" select a.id as value, a.name as label from t_app a where 1=1");
+        sql.append(" select a.id as value, a.name as label from t_app a  ");
 
         if (!Objects.isNull(valueLableDto.getType()) && valueLableDto.getType() > 0) {
-            sql.append(" not exists (select 1 from t_store s where s.appid=a.id)");
+            sql.append(" where not exists (select 1 from t_store s where s.appid=a.id)");
         }
         logger.info(sql.toString());
         return sql.toString();
