@@ -2,6 +2,11 @@
 export const urls = {
   // 查询全部小程序
   pageUrl: '/app/queryAppAll',
+  // 添加小程序
+  addUrl: '/app/addApp',
+  // 编辑小程序
+  updateUrl: '/app/updateApp',
+  // 小程序下拉框
   selectUrl: '/app/queryAppValueLabel'
 }
 // 查询商品请求参数

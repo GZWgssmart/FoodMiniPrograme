@@ -268,8 +268,7 @@ export default {
         }],
         price: [{
           required: true,
-          message: '请输入商品价格',
-          trigger: 'blur'
+          message: '请输入商品价格'
         }],
         appid: [{
           required: true,
@@ -401,7 +400,7 @@ export default {
         this.$refs['myForm'].validate((valid) => {
           if (valid) {
             ajaxFun(urls, this.myForm, 'post').then(res => {
-              if (res.data.status === '0') {
+              if (res.data.status === 0) {
                 this.$Message.success(this.modalTitle + '成功')
               } else {
                 this.$Message.error(this.modalTitle + '失败')
@@ -428,7 +427,7 @@ export default {
       var url = table.urls.statusUrl
       const text = row.status === '禁用' ? '启用' : '禁用'
       ajaxFun(url, row, 'post').then(res => {
-        if (res.data.status === '0') {
+        if (res.data.status === 0) {
           this.$Message.success(text + '成功')
         } else {
           this.$Message.error(res.data.msg)

@@ -7,7 +7,8 @@
       <i-col span="12">
         <Input v-model="conForm.data.name" placeholder="请输入商铺名称搜搜..." style="width: 200px" @on-enter="searchPage" />
         <span @click="searchPage" style="margin: 0 10px;"><Button type="primary" icon="ios-search">查询</Button></span>
-        <i-button type="info" @click="conModal = true" icon="ios-funnel">筛选</i-button>
+        <i-button type="info" @click="conModal = true" icon="ios-funnel" style="margin: 0 10px;">筛选</i-button>
+        <i-button type="default" @click="returnApp" icon="ios-arrow-back" v-if="isApp">返回</i-button>
       </i-col>
       <!-- 分页组件 -->
       <i-col span="12">
@@ -53,7 +54,7 @@
   </modal>
 
   <!-- 添加和修改模态窗 -->
-  <modal v-model="myModal" @on-ok="addOrUpdate()" :width="750" @on-cancel="cancel()" :loading="myLoading" :mask-closable="false">
+  <modal v-model="myModal" @on-ok="addOrUpdate()" :width="650" @on-cancel="cancel()" :loading="myLoading" :mask-closable="false">
     <p slot="header">
       <span style="font-size:20px;">{{ modalTitle }}</span>
     </p>
@@ -69,7 +70,7 @@
         </i-select>
       </form-item>
       <form-item label="名称" prop="name">
-        <i-input v-model="myForm.name" placeholder="请输入商品名称"></i-input>
+        <i-input v-model="myForm.name" placeholder="请输入商家名称"></i-input>
       </form-item>
       <form-item label="商家电话" prop="tel">
         <i-input v-model="myForm.tel" placeholder="请输入商家电话"></i-input>
@@ -105,6 +106,8 @@ export default {
   name: 'store-page',
   data () {
     return {
+      appid: this.$route.params.appid,
+      isApp: false,
       columns: [{
         type: 'selection',
         width: 60,
@@ -266,6 +269,12 @@ export default {
     searchPage () {
       const pageUrl = table.urls.pageUrl
       this.tableLoading = true
+      if (this.appid !== undefined) {
+        this.conForm.data.appid = this.appid
+        this.isApp = true
+      } else {
+        this.isApp = false
+      }
       var params = this.conForm
       ajaxFun(pageUrl, params, 'post').then(res => {
         this.tableData = res.data.datalist
@@ -369,7 +378,7 @@ export default {
         this.$refs['myForm'].validate((valid) => {
           if (valid) {
             ajaxFun(urls, this.myForm, 'post').then(res => {
-              if (res.data.status === '0') {
+              if (res.data.status === 0) {
                 this.$Message.success(this.modalTitle + '成功')
               } else {
                 this.$Message.error(this.modalTitle + '失败')
@@ -396,7 +405,7 @@ export default {
       var url = table.urls.statusUrl
       const text = row.status === '禁用' ? '启用' : '禁用'
       ajaxFun(url, row, 'post').then(res => {
-        if (res.data.status === '0') {
+        if (res.data.status === 0) {
           this.$Message.success(text + '成功')
         } else {
           this.$Message.error(res.data.msg)
@@ -420,6 +429,13 @@ export default {
         params: {
           'storeid': row.id
         }
+      })
+    },
+    // 返回小程序页面
+    returnApp () {
+      this.$router.push({
+        name: 'app_page',
+        params: ''
       })
     }
   },
