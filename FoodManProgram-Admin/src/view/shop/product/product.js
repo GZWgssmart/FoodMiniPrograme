@@ -13,6 +13,7 @@ export const urls = {
 // 查询商品请求参数
 export const conParam = {
   'data': {
+    'sid': '',
     'appid': '',
     'createtime': '',
     'des': '',
@@ -21,9 +22,10 @@ export const conParam = {
     'imgdetail': '',
     'name': '',
     'price': '',
-    'sid': '',
     'status': '',
-    'title': ''
+    'title': '',
+    'pricestart': '',
+    'priceend': ''
   },
   'datalist': [{
     'appid': 0,

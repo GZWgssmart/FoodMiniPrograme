@@ -5,9 +5,14 @@
     <!-- 搜索栏 -->
     <Row slot="title" style="height: auto;">
       <i-col span="12">
-        <Input v-model="conForm.data.name" placeholder="请输入商品名称搜搜..." style="width: 200px" @on-enter="searchPage" />
-        <span @click="searchPage" style="margin: 0 10px;"><Button type="primary" icon="ios-search">查询</Button></span>
-        <i-button type="info" @click="conModal = true" icon="ios-funnel">筛选</i-button>
+        <Row>
+          <i-col >
+            <Input v-model="conForm.data.name" placeholder="请输入商品名称搜搜..." style="width: 200px" @on-enter="searchPage" />
+            <span @click="searchPage" style="margin: 0 10px;"><Button type="primary" icon="ios-search">查询</Button></span>
+            <i-button type="info" @click="conModal = true" icon="ios-funnel" style="margin: 0 10px;">筛选</i-button>
+            <i-button type="default" @click="returnStore" icon="ios-arrow-back" v-if="isStore">返回</i-button>
+          </i-col>
+        </Row>
       </i-col>
       <!-- 分页组件 -->
       <i-col span="12">
@@ -47,13 +52,13 @@
       <form-item label="价格" prop="price">
         <Row>
           <i-col span="11">
-            <i-input v-model="minPrice" placeholder="请输入商品价格"></i-input>
+            <i-input v-model="conForm.data.pricestart" placeholder="请输入商品价格"></i-input>
           </i-col>
           <i-col span="2">
             <div style="text-align: center;">-</div>
           </i-col>
           <i-col span="11">
-            <i-input v-model="maxPrice" placeholder="请输入商品价格"></i-input>
+            <i-input v-model="conForm.data.priceend" placeholder="请输入商品价格"></i-input>
           </i-col>
         </Row>
       </form-item>
@@ -71,6 +76,22 @@
       <span style="font-size:20px;">{{ modalTitle }}</span>
     </p>
     <i-form ref="myForm" :model="myForm" :rules="ruleValidate" :label-width="120">
+      <row>
+        <i-col span="12">
+          <form-item label="小程序" prop="appid">
+            <i-select v-model="myForm.appid" clearable filterable @on-change="getAllStoreSelectByApp">
+              <i-option v-for="item in appList" :value="item.value" :key="item.value">{{item.label}}</i-option>
+            </i-select>
+          </form-item>
+        </i-col>
+        <i-col span="12">
+          <form-item label="店铺" prop="sid">
+            <i-select v-model="myForm.sid" clearable filterable>
+              <i-option v-for="item in storeList" :value="item.value" :key="item.value">{{item.label}}</i-option>
+            </i-select>
+          </form-item>
+        </i-col>
+      </row>
       <row>
         <i-col span="12">
           <form-item label="名称" prop="name">
@@ -102,13 +123,24 @@ import {
   ajaxFun
 } from '@/api/common.js'
 import {
-  statusList
+  statusList,
+  getAllList,
+  getStoreAllListByAppId
 } from '@/api/select.js'
+import {
+  urls as appUrls,
+  formParam as appFormParam
+} from '@/view/app/app.js'
+import {
+  urls as storeUrls
+} from '@/view/shop/store/store.js'
 import * as table from './product.js'
 export default {
   name: 'product-page',
   data () {
     return {
+      storeid: this.$route.params.storeid,
+      isStore: false,
       columns: [{
         type: 'selection',
         width: 60,
@@ -215,8 +247,6 @@ export default {
       conModal: false,
       conLoading: false,
       conForm: table.conParam,
-      minPrice: '',
-      maxPrice: '',
 
       selectionData: [],
 
@@ -240,10 +270,21 @@ export default {
           required: true,
           message: '请输入商品价格',
           trigger: 'blur'
+        }],
+        appid: [{
+          required: true,
+          message: '请选择小程序'
+        }],
+        sid: [{
+          required: true,
+          message: '请选择店铺'
         }]
       },
 
-      statusList: statusList
+      statusList: statusList,
+      appList: [],
+      storeList: [],
+      storeListSelect: []
     }
   },
   methods: {
@@ -251,10 +292,13 @@ export default {
     searchPage () {
       const pageUrl = table.urls.pageUrl
       this.tableLoading = true
-      var params = this.conForm
-      if (this.minPrice !== '' || this.maxPrice !== '') {
-        this.conForm.data.price = this.minPrice + ',' + this.maxPrice
+      if (this.storeid !== undefined) {
+        this.conForm.data.sid = this.storeid
+        this.isStore = true
+      } else {
+        this.isStore = false
       }
+      var params = this.conForm
       ajaxFun(pageUrl, params, 'post').then(res => {
         this.tableData = res.data.datalist
         this.pageTotal = res.data.totalrecords
@@ -391,10 +435,35 @@ export default {
         }
         this.searchPage()
       })
+    },
+    // 获取所有小程序
+    getAllAppSelect () {
+      const param = {
+        'type': 0
+      }
+      getAllList(appUrls.selectUrl, param).then(res => {
+        this.appList = res.data.datalist
+      })
+    },
+    // 根据小程序获取商铺
+    getAllStoreSelectByApp (appId) {
+      appFormParam.id = appId
+      getStoreAllListByAppId(storeUrls.selectByAppIdUrl, appFormParam).then(res => {
+        this.storeList = res.data.datalist
+        console.log(this.storeList)
+      })
+    },
+    // 返回商铺页面
+    returnStore () {
+      this.$router.push({
+        name: '/shop/store_page',
+        params: ''
+      })
     }
   },
   mounted () {
     this.searchPage()
+    this.getAllAppSelect()
   }
 }
 </script>

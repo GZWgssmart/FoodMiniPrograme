@@ -69,8 +69,8 @@ export default [
     component: Main,
     children: [
       {
-        path: 'store_page',
-        name: 'store_page',
+        path: '/shop/store_page',
+        name: '/shop/store_page',
         meta: {
           icon: 'md-trending-up',
           title: '店铺管理'
@@ -78,8 +78,8 @@ export default [
         component: () => import('@/view/shop/store/store-page.vue')
       },
       {
-        path: 'product_page',
-        name: 'product_page',
+        path: '/shop/product_page',
+        name: '/shop/product_page',
         meta: {
           icon: 'md-grid',
           title: '商品管理'
