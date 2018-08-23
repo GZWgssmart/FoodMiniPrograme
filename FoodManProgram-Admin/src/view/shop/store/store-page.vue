@@ -117,37 +117,50 @@ export default {
       },
       {
         title: '小程序',
-        key: 'appid',
-        sortable: true
+        key: 'appname',
+        sortable: true,
+        width: 100
       },
       {
         title: '商家名称',
         key: 'name',
-        sortable: true
+        sortable: true,
+        width: 200
       },
       {
         title: '商家类型',
         key: 'type',
-        sortable: true
+        sortable: true,
+        width: 100
       },
       {
         title: '商家电话',
         key: 'tel',
-        sortable: true
+        sortable: true,
+        width: 150
       },
       {
         title: '商家地址',
         key: 'address',
-        sortable: true
+        sortable: true,
+        width: 300
       },
       {
         title: '描述',
-        key: 'des'
+        key: 'des',
+        width: 600
+      },
+      {
+        title: '创建时间',
+        key: 'createtime',
+        sortable: true,
+        width: 200
       },
       {
         title: '状态',
         key: 'status',
         sortable: true,
+        width: 100,
         render: (h, params) => {
           const row = params.row
           const color = row.status === '禁用' ? 'error' : 'success'

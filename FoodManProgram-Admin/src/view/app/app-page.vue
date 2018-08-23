@@ -77,7 +77,14 @@ export default {
       },
       {
         title: '描述',
-        key: 'des'
+        key: 'des',
+        width: 600
+      },
+      {
+        title: '创建时间',
+        key: 'createtime',
+        sortable: true,
+        width: 200
       },
       {
         title: '操作',

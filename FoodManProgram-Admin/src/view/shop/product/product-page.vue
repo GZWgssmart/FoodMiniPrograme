@@ -150,37 +150,51 @@ export default {
       },
       {
         title: '小程序',
-        key: 'appid',
+        key: 'appname',
+        width: 200,
         sortable: true
       },
       {
         title: '门店',
-        key: 'sid',
+        key: 'storename',
+        width: 200,
         sortable: true
       },
       {
         title: '商品名称',
         key: 'name',
+        width: 200,
         sortable: true
       },
       {
         title: '商品标题',
         key: 'title',
+        width: 200,
         sortable: true
       },
       {
-        title: '价格',
+        title: '价格(元)',
         key: 'price',
-        sortable: true
+        width: 100,
+        sortable: true,
+        render: (h, params) => {
+          const row = params.row
+          return h('div', [
+            h('span', {
+            }, '￥' + row.price)
+          ])
+        }
       },
       {
         title: '描述',
-        key: 'des'
+        key: 'des',
+        width: 600
       },
       {
         title: '状态',
         key: 'status',
         sortable: true,
+        width: 100,
         render: (h, params) => {
           const row = params.row
           const color = row.status === '禁用' ? 'error' : 'success'
@@ -194,6 +208,12 @@ export default {
             }, text)
           ])
         }
+      },
+      {
+        title: '创建时间',
+        key: 'createtime',
+        sortable: true,
+        width: 200
       },
       {
         title: '操作',
