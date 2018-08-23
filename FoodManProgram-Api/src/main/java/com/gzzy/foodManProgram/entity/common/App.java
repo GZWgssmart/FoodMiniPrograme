@@ -1,5 +1,8 @@
 package com.gzzy.foodManProgram.entity.common;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -13,6 +16,8 @@ public class App {
     private int id;
     private String name;
     private String des;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createtime;
 
     public int getId() {
