@@ -52,7 +52,7 @@ export default [
         path: 'app_page',
         name: 'app_page',
         meta: {
-          icon: '_qq',
+          icon: 'ios-link',
           title: '小程序'
         },
         component: () => import('@/view/app/app-page.vue')

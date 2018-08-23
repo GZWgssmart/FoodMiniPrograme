@@ -274,6 +274,7 @@ export default {
         this.isApp = true
       } else {
         this.isApp = false
+        this.conForm.data.appid = ''
       }
       var params = this.conForm
       ajaxFun(pageUrl, params, 'post').then(res => {

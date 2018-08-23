@@ -295,6 +295,7 @@ export default {
         this.conForm.data.sid = this.storeid
         this.isStore = true
       } else {
+        this.conForm.data.sid = ''
         this.isStore = false
       }
       var params = this.conForm
