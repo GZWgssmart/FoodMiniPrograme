@@ -1,6 +1,7 @@
 package com.gzzy.foodManProgram.dao.common;
 
 import com.gzzy.foodManProgram.dao.common.provide.CommonProvide;
+import com.gzzy.foodManProgram.dto.ValueLableDto;
 import com.gzzy.foodManProgram.entity.common.App;
 import com.gzzy.foodManProgram.entity.common.bean.ValueLabel;
 import org.apache.ibatis.annotations.*;
@@ -39,8 +40,7 @@ public interface AppDao {
      * @auther: wangbin
      * @date: 2018/8/22/022 17:09
      */
-
-    @Select("select id as value,name as label from t_app")
-    List<ValueLabel> queryAppValueLabel();
+    @SelectProvider(type = CommonProvide.class,method = "queryAppValueLabel")
+    List<ValueLabel> queryAppValueLabel(ValueLableDto valueLableDto);
 
 }

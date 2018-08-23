@@ -88,7 +88,7 @@ public class StoreController {
 
     @RequestMapping(value = "/queryStoreValueLabelByAppId",method = RequestMethod.POST)
     @ApiOperation(value = "根据appId查询所有商家",notes = "根据appId查询所有商家")
-    public AbstractOutputDto queryStoreValueLabelByAppid(@ApiParam(name="启用禁用商铺",value = "传入JSON格式") @RequestBody App app){
+    public AbstractOutputDto queryStoreValueLabelByAppid(@ApiParam(name="根据appId查询所有商家",value = "传入JSON格式") @RequestBody App app){
         AbstractOutputDto obj = new AbstractOutputDto();
         List<ValueLabel> valueLabels = storeService.queryStoreValueLabelByAppid(app.getId());
         obj.setDatalist(valueLabels);

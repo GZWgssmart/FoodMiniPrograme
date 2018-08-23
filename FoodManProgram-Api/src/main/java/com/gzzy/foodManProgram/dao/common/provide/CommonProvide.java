@@ -2,6 +2,7 @@ package com.gzzy.foodManProgram.dao.common.provide;
 
 import com.gzzy.foodManProgram.dto.ProductDto;
 import com.gzzy.foodManProgram.dto.StoreDto;
+import com.gzzy.foodManProgram.dto.ValueLableDto;
 import com.gzzy.foodManProgram.entity.common.App;
 import com.gzzy.foodManProgram.entity.common.Product;
 import com.gzzy.foodManProgram.entity.common.Store;
@@ -210,6 +211,19 @@ public class CommonProvide {
             if(priceend.compareTo(BigDecimal.ZERO)!=0){
                 sql.append(" and p.price <= ").append(priceend);
             }
+        }
+        logger.info(sql.toString());
+        return sql.toString();
+    }
+
+
+    //小程序app
+    public String queryAppValueLabel(ValueLableDto valueLableDto){
+        StringBuilder sql=new StringBuilder();
+        sql.append(" select a.id as value, a.name as label from t_app a where 1=1");
+
+        if (!Objects.isNull(valueLableDto.getType()) && valueLableDto.getType() > 0) {
+            sql.append(" not exists (select 1 from t_store s where s.appid=a.id)");
         }
         logger.info(sql.toString());
         return sql.toString();

@@ -3,6 +3,7 @@ package com.gzzy.foodManProgram.service.common;
 import com.gzzy.foodManProgram.dao.common.AppDao;
 import com.gzzy.foodManProgram.dto.AbstractInputDto;
 import com.gzzy.foodManProgram.dto.AbstractOutputDto;
+import com.gzzy.foodManProgram.dto.ValueLableDto;
 import com.gzzy.foodManProgram.entity.common.App;
 import com.gzzy.foodManProgram.entity.common.bean.ValueLabel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,8 +60,8 @@ public class AppService {
      * @auther: wangbin
      * @date: 2018/8/22/022 17:14
      */
-    public List<ValueLabel> queryAppValueLabel() {
-        List<ValueLabel> valueLabels = appDao.queryAppValueLabel();
+    public List<ValueLabel> queryAppValueLabel(ValueLableDto valueLableDto) {
+        List<ValueLabel> valueLabels = appDao.queryAppValueLabel(valueLableDto);
         return valueLabels;
     }
 }

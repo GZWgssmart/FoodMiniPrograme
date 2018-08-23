@@ -2,6 +2,7 @@ package com.gzzy.foodManProgram.controller.common;
 
 import com.gzzy.foodManProgram.dto.AbstractInputDto;
 import com.gzzy.foodManProgram.dto.AbstractOutputDto;
+import com.gzzy.foodManProgram.dto.ValueLableDto;
 import com.gzzy.foodManProgram.entity.common.App;
 import com.gzzy.foodManProgram.entity.common.bean.ValueLabel;
 import com.gzzy.foodManProgram.service.common.AppService;
@@ -59,9 +60,9 @@ public class AppController {
 
     @RequestMapping(value = "/queryAppValueLabel",method = RequestMethod.POST)
     @ApiOperation(value = "查询所有小程序",notes = "查询所有小程序")
-    public AbstractOutputDto queryAppValueLabel(){
+    public AbstractOutputDto queryAppValueLabel(@ApiParam(name="查询所有小程序",value = "传入JSON格式") @RequestBody ValueLableDto valueLableDto){
         AbstractOutputDto obj = new AbstractOutputDto();
-        List<ValueLabel> valueLabels = appService.queryAppValueLabel();
+        List<ValueLabel> valueLabels = appService.queryAppValueLabel(valueLableDto);
         obj.setDatalist(valueLabels);
         return obj;
     }
