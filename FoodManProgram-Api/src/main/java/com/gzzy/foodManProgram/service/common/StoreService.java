@@ -108,8 +108,8 @@ public class StoreService {
      * @auther: wangbin
      * @date: 2018/8/22/022 17:14
      */
-    public List<ValueLabel> queryStoreValueLabel() {
-        List<ValueLabel> valueLabels = storeDao.queryStoreValueLabel();
+    public List<ValueLabel> queryStoreValueLabel(int appid) {
+        List<ValueLabel> valueLabels = storeDao.queryStoreValueLabel(appid);
         return valueLabels;
     }
 
