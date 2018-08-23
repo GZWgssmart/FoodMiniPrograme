@@ -45,8 +45,16 @@ public class StoreService {
     }
 
 
-    public void insertStore(Store store) {
-        storeDao.insertStore(store);
+    public AbstractOutputDto insertStore(Store store) {
+        AbstractOutputDto abstractOutputDto= new AbstractOutputDto();
+       List<ValueLabel> valueLabels = storeDao.queryStoreValueLabelByAppid(store.getAppid());
+       if (valueLabels.size() == 0) {
+           storeDao.insertStore(store);
+           abstractOutputDto.setMsg("添加成功");
+       } else {
+           abstractOutputDto.setMsg("该小程序已经存在商家");
+       }
+       return abstractOutputDto;
     }
 
     public void updateStore(Store store) {
@@ -104,14 +112,26 @@ public class StoreService {
 
     /**
      *
+     * 功能描述:根据appid查询所有商家
+     * @auther: wangbin
+     * @date: 2018/8/22/022 17:14
+     */
+    public List<ValueLabel> queryStoreValueLabelByAppid(int appid) {
+        List<ValueLabel> valueLabels = storeDao.queryStoreValueLabelByAppid(appid);
+        return valueLabels;
+    }
+
+    /**
+     *
      * 功能描述:查询所有商家
      * @auther: wangbin
      * @date: 2018/8/22/022 17:14
      */
-    public List<ValueLabel> queryStoreValueLabel(int appid) {
-        List<ValueLabel> valueLabels = storeDao.queryStoreValueLabel(appid);
+    public List<ValueLabel> queryStoreValueLabel() {
+        List<ValueLabel> valueLabels = storeDao.queryStoreValueLabel();
         return valueLabels;
     }
+
 
 
 }

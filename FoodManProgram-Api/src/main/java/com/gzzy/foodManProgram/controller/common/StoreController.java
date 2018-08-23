@@ -44,9 +44,8 @@ public class StoreController {
     @ApiOperation(value = "添加商家",notes = "添加商家")
     public AbstractOutputDto addStore(@ApiParam(name="添加商家",value = "传入JSON格式") @RequestBody Store store){
         AbstractOutputDto obj = new AbstractOutputDto();
-        storeService.insertStore(store);
+        obj =storeService.insertStore(store);
         obj.setStatus(0);
-        obj.setMsg("添加成功");
         return obj;
     }
 
@@ -89,9 +88,18 @@ public class StoreController {
 
     @RequestMapping(value = "/queryStoreValueLabelByAppId",method = RequestMethod.POST)
     @ApiOperation(value = "根据appId查询所有商家",notes = "根据appId查询所有商家")
-    public AbstractOutputDto queryAppValueLabel(@ApiParam(name="启用禁用商铺",value = "传入JSON格式") @RequestBody App app){
+    public AbstractOutputDto queryStoreValueLabelByAppid(@ApiParam(name="启用禁用商铺",value = "传入JSON格式") @RequestBody App app){
         AbstractOutputDto obj = new AbstractOutputDto();
-        List<ValueLabel> valueLabels = storeService.queryStoreValueLabel(app.getId());
+        List<ValueLabel> valueLabels = storeService.queryStoreValueLabelByAppid(app.getId());
+        obj.setDatalist(valueLabels);
+        return obj;
+    }
+
+    @RequestMapping(value = "/queryStoreValueLabel",method = RequestMethod.POST)
+    @ApiOperation(value = "查询所有商家",notes = "查询所有商家")
+    public AbstractOutputDto queryStoreValueLabel(){
+        AbstractOutputDto obj = new AbstractOutputDto();
+        List<ValueLabel> valueLabels = storeService.queryStoreValueLabel();
         obj.setDatalist(valueLabels);
         return obj;
     }

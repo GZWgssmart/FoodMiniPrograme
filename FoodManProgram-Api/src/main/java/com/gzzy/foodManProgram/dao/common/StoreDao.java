@@ -119,12 +119,22 @@ public interface StoreDao {
 
     /**
      *
-     * 功能描述: 查询所有商家
+     * 功能描述: 根据appid查询所有商家
      * @auther: wangbin
      * @date: 2018/8/22/022 17:09
      */
 
     @Select("select s.id as value, s.name as label from t_store s left join t_app a on s.appid = a.id where s.appid = #{appid} and status = '启用'")
-    List<ValueLabel> queryStoreValueLabel(@Param("appid") int appid);
+    List<ValueLabel> queryStoreValueLabelByAppid(@Param("appid") int appid);
+
+    /**
+     *
+     * 功能描述: 根据appid查询所有商家
+     * @auther: wangbin
+     * @date: 2018/8/22/022 17:09
+     */
+
+    @Select("select s.id as value, s.name as label from t_store s  where  status = '启用'")
+    List<ValueLabel> queryStoreValueLabel();
 
 }
