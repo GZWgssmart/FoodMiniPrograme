@@ -22,8 +22,8 @@ class httpRequest {
   interceptors (instance, url) {
     // 添加请求拦截器
     instance.interceptors.request.use(config => {
-      // if (!config.url.includes('/users')) {
-      //   config.headers['x-access-token'] = Cookies.get(TOKEN_KEY)
+      // if (config.url.includes('/files')) {
+      //   config.headers['Content-Type'] = 'multipart/form-data'
       // }
       // Spin.show()
       // 在发送请求之前做些什么

@@ -78,6 +78,15 @@
       <form-item label="宣传视频地址" prop="video">
         <i-input v-model="myForm.video" placeholder="请输入视频的地址"></i-input>
       </form-item>
+      <form-item label="店铺图片" prop="logo">
+        <img :src="logo" style="width: 60px; margin-right: 10px;">
+        <upload ref="upload" :show-upload-list="false" :on-success="handleSuccess" :format="['jpg','jpeg','png']" :max-size="2048" :on-format-error="handleFormatError" :on-exceeded-size="handleMaxSize" :before-upload="handleBeforeUpload" multiple type="drag"
+          :action="uploadUrl" style="display: inline-block;width:58px;">
+          <div style="width: 58px;height:58px;line-height: 58px;">
+            <icon type="ios-camera" size="20"></icon>
+          </div>
+        </upload>
+      </form-item>
       <form-item label="经纬度查询地址：">
         <a href="http://lbs.qq.com/tool/getpoint/" target="_blank">坐标拾取器</a>
       </form-item>
@@ -102,12 +111,21 @@
       </form-item>
     </i-form>
   </modal>
+
+  <!-- 显示图片的模态窗 -->
+  <Modal v-model="imgModal" width="650">
+    <p slot="header">
+      <span style="font-size:20px;">{{ imgModalTitle }}</span>
+    </p>
+    <img :src="imgModalImgSrc" style="width: 620px" />
+  </Modal>
 </div>
 </template>
 
 <script>
 import '@/styles/common.less'
 import '@/styles/table.less'
+import baseURL from '_conf/url'
 import {
   ajaxFun
 } from '@/api/common.js'
@@ -156,6 +174,34 @@ export default {
         key: 'tel',
         sortable: true,
         width: 150
+      },
+      {
+        title: '店铺图片',
+        key: 'logo',
+        width: 200,
+        render: (h, params) => {
+          const row = params.row
+          const text = row.logo
+          return h('div', [
+            h('img', {
+              attrs: {
+                src: text
+              },
+              style: {
+                width: '161.5px',
+                height: '44px',
+                cursor: 'pointer'
+              },
+              on: {
+                click: () => {
+                  this.imgModalImgSrc = row.logo
+                  this.imgModal = true
+                  this.imgModalTitle = row.name
+                }
+              }
+            }, '')
+          ])
+        }
       },
       {
         title: '商家地址',
@@ -304,7 +350,15 @@ export default {
 
       statusList: statusList,
       appList: [],
-      storeType: storeType
+      storeType: storeType,
+
+      logo: '',
+      uploadList: [],
+      uploadUrl: baseURL + '/files/upload',
+
+      imgModal: false,
+      imgModalImgSrc: '',
+      imgModalTitle: ''
     }
   },
   methods: {
@@ -390,12 +444,14 @@ export default {
     showModal (row) {
       this.type = row
       if (row === 'add') {
+        this.logo = this.myForm.logo
         this.emptyForm('myForm')
         this.myForm = table.formParam
         this.modalTitle = '添加'
         this.myModal = true
         this.myLoading = true
       } else {
+        this.logo = row.logo
         const status = row.status
         if (status === '禁用') {
           this.$Message.warning('不能对禁用的数据进行编辑')
@@ -426,6 +482,7 @@ export default {
       if (urls !== '') {
         this.$refs['myForm'].validate((valid) => {
           if (valid) {
+            this.myForm.logo = this.logo
             ajaxFun(urls, this.myForm, 'post').then(res => {
               if (res.data.status === 0) {
                 this.myModal = false
@@ -487,6 +544,39 @@ export default {
         name: 'app_page',
         params: ''
       })
+    },
+    handleSuccess (res, file) {
+      if (res.status === 0) {
+        this.$Notice.success({
+          title: '文件上传成功',
+          desc: '文件 ' + file.name + ' 上传成功。'
+        })
+        this.logo = res.data.img
+        console.log(this.logo)
+        file.url = 'https://o5wwk8baw.qnssl.com/7eb99afb9d5f317c912f08b5212fd69a/avatar'
+        file.name = '7eb99afb9d5f317c912f08b5212fd69a'
+      }
+    },
+    handleFormatError (file) {
+      this.$Notice.warning({
+        title: '文件格式不正确',
+        desc: '文件 ' + file.name + ' 文件格式不正确，请选择JPG或PNG.'
+      })
+    },
+    handleMaxSize (file) {
+      this.$Notice.warning({
+        title: '超过文件大小限制',
+        desc: '文件  ' + file.name + ' 文件过大, 不能超过2M.'
+      })
+    },
+    handleBeforeUpload () {
+      const check = this.uploadList.length < 2
+      if (!check) {
+        this.$Notice.warning({
+          title: '只能上传一张图片.'
+        })
+      }
+      return check
     }
   },
   mounted () {
