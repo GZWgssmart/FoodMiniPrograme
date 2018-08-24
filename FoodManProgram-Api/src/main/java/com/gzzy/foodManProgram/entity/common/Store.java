@@ -3,6 +3,7 @@ package com.gzzy.foodManProgram.entity.common;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -27,8 +28,8 @@ public class Store {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createtime;
     private String status;
-    private int longitude; //经度
-    private int latitude; //纬度
+    private BigDecimal longitude;
+    private BigDecimal latitude;
 
     private String appname;
 
@@ -48,19 +49,19 @@ public class Store {
         this.logo = logo;
     }
 
-    public int getLongitude() {
+    public BigDecimal getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(int longitude) {
+    public void setLongitude(BigDecimal longitude) {
         this.longitude = longitude;
     }
 
-    public int getLatitude() {
+    public BigDecimal getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(int latitude) {
+    public void setLatitude(BigDecimal latitude) {
         this.latitude = latitude;
     }
 
