@@ -75,9 +75,27 @@
       <form-item label="商家电话" prop="tel">
         <i-input v-model="myForm.tel" placeholder="请输入商家电话"></i-input>
       </form-item>
+      <form-item label="宣传视频地址" prop="video">
+        <i-input v-model="myForm.video" placeholder="请输入视频的地址"></i-input>
+      </form-item>
+      <form-item label="经纬度查询地址：">
+        <a href="http://lbs.qq.com/tool/getpoint/" target="_blank">坐标拾取器</a>
+      </form-item>
       <form-item label="商家地址" prop="address">
         <i-input v-model="myForm.address" placeholder="请输入商家地址"></i-input>
       </form-item>
+      <Row>
+        <i-col span="12">
+          <form-item label="经度" prop="longitude">
+            <i-input v-model="myForm.longitude" placeholder="请输入地图经度"></i-input>
+          </form-item>
+        </i-col>
+        <i-col span="12">
+          <form-item label="纬度" prop="latitude">
+            <i-input v-model="myForm.latitude" placeholder="请输入地图纬度"></i-input>
+          </form-item>
+        </i-col>
+      </Row>
 
       <form-item label="描述" prop="des">
         <i-input v-model="myForm.des" type="textarea" :autosize="{minRows: 3,maxRows: 5}" placeholder="请输入商品描述"></i-input>
@@ -269,6 +287,18 @@ export default {
         type: [{
           required: true,
           message: '请选择商家类型'
+        }],
+        address: [{
+          required: true,
+          message: '请输入商家地址'
+        }],
+        longitude: [{
+          required: true,
+          message: '请输入经度'
+        }],
+        latitude: [{
+          required: true,
+          message: '请输入纬度'
         }]
       },
 

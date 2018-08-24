@@ -36,7 +36,7 @@ export default {
     }) {
       Cookies.set('user', userName)
       Cookies.set('password', password)
-      this.$store.commit('avator', '@/assets/images/head.png')
+      this.$store.commit('avator', 'https://file.iviewui.com/dist/a0e88e83800f138b94d2414621bd9704.png')
       Cookies.set('access', 'super_admin')
       Cookies.set('token', 'super_admin')
       this.$router.push({
