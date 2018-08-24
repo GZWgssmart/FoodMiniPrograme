@@ -132,18 +132,14 @@
   </modal>
 
   <!-- 显示图片的模态窗 -->
-  <Modal v-model="imgModal" width="650">
-    <p slot="header">
-      <span style="font-size:20px;">{{ imgModalTitle }}</span>
-    </p>
-    <img :src="imgModalImgSrc" style="width: 620px" />
-  </Modal>
+  <myImgModal :imgModalTitle="imgModalTitle" :imgModalImgSrc="imgModalImgSrc" :imgModal="imgModal" />
 </div>
 </template>
 
 <script>
 import '@/styles/common.less'
 import '@/styles/table.less'
+import myImgModal from '@/view/main/components/img-modal'
 import baseURL from '_conf/url'
 import {
   ajaxFun
@@ -162,6 +158,9 @@ import {
 } from '@/view/shop/store/store.js'
 import * as table from './product.js'
 export default {
+  components: {
+    myImgModal
+  },
   name: 'product-page',
   data () {
     return {
