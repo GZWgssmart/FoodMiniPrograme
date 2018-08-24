@@ -75,7 +75,8 @@ public class FileService {
             }
             boolean flag =  HttpClientUtil.doUploadClientforfile(file.getBytes(), record);
             if(flag){//上传成功
-                img.setImg(srcImgPath);
+                String url = "http://127.0.0.1:8080" + "/" + fileNewName;
+                img.setImg(url);
             }
         }catch (Exception e){
             e.printStackTrace();
