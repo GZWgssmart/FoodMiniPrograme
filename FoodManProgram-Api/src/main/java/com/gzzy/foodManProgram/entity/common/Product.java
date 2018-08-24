@@ -1,5 +1,8 @@
 package com.gzzy.foodManProgram.entity.common;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -19,7 +22,10 @@ public class Product {
     private String des;
     private String img;
     private int appid;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createtime;
+
     private String status;
     private String imgdetail; //长图
 
