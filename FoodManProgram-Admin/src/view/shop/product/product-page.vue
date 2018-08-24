@@ -132,14 +132,18 @@
   </modal>
 
   <!-- 显示图片的模态窗 -->
-  <myImgModal :imgModalTitle="imgModalTitle" :imgModalImgSrc="imgModalImgSrc" :imgModal="imgModal" />
+  <Modal v-model="imgModal" width="650">
+    <p slot="header">
+      <span style="font-size:20px;">{{ imgModalTitle }}</span>
+    </p>
+    <img :src="imgModalImgSrc" style="width: 620px" />
+  </Modal>
 </div>
 </template>
 
 <script>
 import '@/styles/common.less'
 import '@/styles/table.less'
-import myImgModal from '@/view/main/components/img-modal'
 import baseURL from '_conf/url'
 import {
   ajaxFun
@@ -158,9 +162,6 @@ import {
 } from '@/view/shop/store/store.js'
 import * as table from './product.js'
 export default {
-  components: {
-    myImgModal
-  },
   name: 'product-page',
   data () {
     return {
@@ -377,6 +378,14 @@ export default {
         sid: [{
           required: true,
           message: '请选择店铺'
+        }],
+        img: [{
+          required: true,
+          message: '请上传商品图片'
+        }],
+        imgdetail: [{
+          required: true,
+          message: '请上传商品详情图'
         }]
       },
 
@@ -518,12 +527,14 @@ export default {
             this.myForm.imgdetail = this.imgdetail
             ajaxFun(urls, this.myForm, 'post').then(res => {
               if (res.data.status === 0) {
+                this.myModal = false
                 this.$Message.success(this.modalTitle + '成功')
               } else {
+                this.myModal = true
                 this.$Message.error(this.modalTitle + '失败')
               }
               this.myLoading = false
-              this.myModal = false
+
               this.emptyForm('myForm')
               this.searchPage()
             })
