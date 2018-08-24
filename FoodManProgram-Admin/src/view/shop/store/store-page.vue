@@ -413,6 +413,11 @@ export default {
       if (this.type !== '') {
         if (this.type === 'add') {
           urls = table.urls.addUrl
+          if (this.myForm.longitude === 0 && this.myForm.latitude === 0) {
+            this.myLoading = false
+            this.$Message.error('请设置经纬度')
+            return
+          }
         } else {
           urls = table.urls.updateUrl
         }
@@ -423,12 +428,13 @@ export default {
           if (valid) {
             ajaxFun(urls, this.myForm, 'post').then(res => {
               if (res.data.status === 0) {
+                this.myModal = false
                 this.$Message.success(this.modalTitle + '成功')
               } else {
                 this.$Message.error(this.modalTitle + '失败')
               }
               this.myLoading = false
-              this.myModal = false
+
               this.emptyForm('myForm')
               this.searchPage()
             })
