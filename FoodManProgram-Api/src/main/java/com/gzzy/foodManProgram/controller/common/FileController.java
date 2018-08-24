@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.slf4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -39,7 +40,7 @@ public class FileController  {
 
     @RequestMapping(value = "/upload",method = RequestMethod.POST)
     @ApiOperation(value = "上传图片视频",notes = "上传图片视频")
-    public AbstractOutputDto singleFileUpload(MultipartFile file) {
+    public AbstractOutputDto singleFileUpload(MultipartFile file) throws FileNotFoundException {
         AbstractOutputDto obj=new AbstractOutputDto();
         Img img = fileService.saveFile(file);
         obj.setData(img);
