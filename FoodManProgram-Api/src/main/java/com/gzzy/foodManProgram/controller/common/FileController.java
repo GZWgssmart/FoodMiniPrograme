@@ -44,10 +44,14 @@ public class FileController  {
     public AbstractOutputDto singleFileUpload(MultipartFile file, HttpServletRequest req, HttpServletResponse resp) throws FileNotFoundException {
         AbstractOutputDto obj=new AbstractOutputDto();
         int type= Util.convertToInt(req.getParameter("type"));
-        Img img = fileService.saveFile(file,type);
-        obj.setData(img);
-        obj.setStatus(0);
-        obj.setMsg("上传成功");
+        if (file != null) {
+            Img img = fileService.saveFile(file,type);
+            obj.setData(img);
+            obj.setStatus(0);
+            obj.setMsg("上传成功");
+        } else {
+            obj.setMsg("上传文件不能为空");
+        }
         return obj;
     }
 
