@@ -9,6 +9,7 @@ import com.gzzy.foodManProgram.entity.common.Img;
 import com.gzzy.foodManProgram.util.DataUtil;
 import com.gzzy.foodManProgram.util.HttpClientUtil;
 import com.gzzy.foodManProgram.util.Util;
+import org.apache.poi.ss.formula.functions.T;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class FileService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public Img saveFile(MultipartFile file) throws FileNotFoundException {
+    public Img saveFile(MultipartFile file, int type) throws FileNotFoundException {
         File classpath = new File(ResourceUtils.getURL("classpath:").getPath());
         if(!classpath.exists()) {
             classpath = new File("");
@@ -76,6 +77,7 @@ public class FileService {
             boolean flag =  HttpClientUtil.doUploadClientforfile(file.getBytes(), record);
             if(flag){//上传成功
                 String url = "http://127.0.0.1:9009" + "/" + fileNewName;
+                img.setType(type);
                 img.setImg(url);
             }
         }catch (Exception e){

@@ -9,6 +9,15 @@ package com.gzzy.foodManProgram.entity.common;
  */
 public class Img {
     String img;
+    int type;
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 
     public String getImg() {
         return img;
