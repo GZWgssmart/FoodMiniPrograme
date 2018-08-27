@@ -17,19 +17,19 @@
 
 <script>
 import LoginForm from '_c/login-form'
-import {
-  mapActions
-} from 'vuex'
+// import {
+//   mapActions
+// } from 'vuex'
 import Cookies from 'js-cookie'
 export default {
   components: {
     LoginForm
   },
   methods: {
-    ...mapActions([
-      'handleLogin',
-      'getUserInfo'
-    ]),
+    // ...mapActions([
+    //   'handleLogin',
+    //   'getUserInfo'
+    // ]),
     handleSubmit ({
       userName,
       password
