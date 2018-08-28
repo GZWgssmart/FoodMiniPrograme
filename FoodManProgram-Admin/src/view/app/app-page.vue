@@ -43,6 +43,15 @@
       <form-item label="名称" prop="name">
         <i-input v-model="myForm.name" placeholder="请输入小程序名称"></i-input>
       </form-item>
+      <form-item label="appid" prop="appid">
+        <i-input v-model="myForm.appid" placeholder="请输入小程序的appid"></i-input>
+      </form-item>
+      <form-item label="账号" prop="account">
+        <i-input v-model="myForm.account" placeholder="请输入小程序登入账号"></i-input>
+      </form-item>
+      <form-item label="密码" prop="password">
+        <i-input v-model="myForm.password" placeholder="请输入小程序登入密码"></i-input>
+      </form-item>
       <form-item label="描述" prop="des">
         <i-input v-model="myForm.des" type="textarea" :autosize="{minRows: 3,maxRows: 5}" placeholder="请输入商品描述"></i-input>
       </form-item>
@@ -74,6 +83,21 @@ export default {
         key: 'name',
         width: 200,
         sortable: true
+      },
+      {
+        title: 'APPID',
+        key: 'appid',
+        width: 200
+      },
+      {
+        title: '账号',
+        key: 'account',
+        width: 200
+      },
+      {
+        title: '密码',
+        key: 'password',
+        width: 200
       },
       {
         title: '描述',
@@ -145,6 +169,21 @@ export default {
         name: [{
           required: true,
           message: '请输入小程序名称',
+          trigger: 'blur'
+        }],
+        appid: [{
+          required: true,
+          message: '请输入小程序的APPID',
+          trigger: 'blur'
+        }],
+        account: [{
+          required: true,
+          message: '请输入小程序的登入账号',
+          trigger: 'blur'
+        }],
+        password: [{
+          required: true,
+          message: '请输入小程序的登入密码',
           trigger: 'blur'
         }]
       }

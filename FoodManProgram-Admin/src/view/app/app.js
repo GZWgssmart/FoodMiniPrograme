@@ -14,12 +14,18 @@ export const conParam = {
   'data': {
     'createtime': '',
     'des': '',
+    'appid': '',
+    'account': '',
+    'password': '',
     'id': '',
     'name': ''
   },
   'datalist': [{
     'createtime': '',
     'des': '',
+    'appid': '',
+    'account': '',
+    'password': '',
     'id': '',
     'name': ''
   }],
@@ -33,6 +39,9 @@ export const conParam = {
 export const formParam = {
   'createtime': '',
   'des': '',
+  'appid': '',
+  'account': '',
+  'password': '',
   'id': '',
   'name': ''
 }
