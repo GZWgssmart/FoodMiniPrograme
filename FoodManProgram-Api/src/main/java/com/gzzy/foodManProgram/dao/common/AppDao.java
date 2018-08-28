@@ -28,10 +28,10 @@ public interface AppDao {
     @SelectProvider(type = CommonProvide.class,method = "queryAppAllCount")
     int queryAppAllCount(App app);
 
-    @Insert("insert into t_app(id,name,des,createtime) values (#{id}, #{name},#{des},now())")
+    @Insert("insert into t_app(id,name,des,appid,account,password,createtime) values (#{id}, #{name},#{des},#{appid},#{account},#{password},now())")
     void insertApp(App app);
 
-    @Update("update t_app set name=#{name}, des = #{des} where id = #{id}")
+    @Update("update t_app set name=#{name}, des = #{des}, appid = #{appid}, account = #{account}, password = #{password} where id = #{id}")
     void updateApp(App app);
 
     /**

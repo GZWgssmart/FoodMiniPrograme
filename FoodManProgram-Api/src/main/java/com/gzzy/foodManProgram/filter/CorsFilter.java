@@ -3,6 +3,7 @@ package com.gzzy.foodManProgram.filter;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -17,7 +18,8 @@ public class CorsFilter implements Filter {
 
         HttpServletResponse response = (HttpServletResponse) res;
         //测试环境用【*】匹配，上生产环境后需要切换为实际的前端请求地址
-        response.setHeader("Access-Control-Allow-Origin", "*");
+
+        response.setHeader("Access-Control-Allow-Origin", "http://139.159.221.235:8080");
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
 
         response.setHeader("Access-Control-Max-Age", "0");

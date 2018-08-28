@@ -16,6 +16,33 @@ public class App {
     private int id;
     private String name;
     private String des;
+    private String appid;
+    private String account;
+    private String password;
+
+    public String getAppid() {
+        return appid;
+    }
+
+    public void setAppid(String appid) {
+        this.appid = appid;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createtime;
