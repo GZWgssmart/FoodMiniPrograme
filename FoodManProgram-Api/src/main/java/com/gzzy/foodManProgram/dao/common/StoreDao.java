@@ -76,7 +76,7 @@ public interface StoreDao {
      * @date: 2018/8/16/016 16:46
      */
     @Select("select * from t_store where appid = #{appid}")
-    Store queryStoreByAppId(@Param("appid") int appid);
+    Store queryStoreByAppId(@Param("appid") String appid);
 
 
     /**
@@ -96,6 +96,15 @@ public interface StoreDao {
      */
     @Select("select * from t_product where sid = #{storeid}")
     List<Product> queryStroeProductByid(@Param("storeid") int storeid);
+
+    /**
+     *
+     * 功能描述: 根据商家id查询商品
+     * @auther: wangbin
+     * @date: 2018/8/16/016 16:46
+     */
+    @Select("select * from t_product where id = #{productid}")
+    Product queryProductByid(@Param("productid") int productid);
 
 
     /**
@@ -125,7 +134,7 @@ public interface StoreDao {
      */
 
     @Select("select s.id as value, s.name as label from t_store s left join t_app a on s.appid = a.id where s.appid = #{appid} and status = '启用'")
-    List<ValueLabel> queryStoreValueLabelByAppid(@Param("appid") int appid);
+    List<ValueLabel> queryStoreValueLabelByAppid(@Param("appid") String appid);
 
     /**
      *

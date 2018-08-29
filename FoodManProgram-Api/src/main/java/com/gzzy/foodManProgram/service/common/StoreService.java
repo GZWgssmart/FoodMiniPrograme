@@ -71,7 +71,7 @@ public class StoreService {
         AbstractOutputDto obj = new AbstractOutputDto();
         StoreProductBean storeProductBean = new StoreProductBean();
         List<Product> products = storeDao.queryProductByAppId(app.getId());
-        Store store =storeDao.queryStoreByAppId(app.getId());
+        Store store =storeDao.queryStoreByAppId(app.getAppid());
         storeProductBean.setStore(store);
         storeProductBean.setProducts(products);
         obj.setData(storeProductBean);
@@ -88,6 +88,19 @@ public class StoreService {
         AbstractOutputDto obj = new AbstractOutputDto();
         List<Product> products =storeDao.queryStroeProductByid(store.getId());
         obj.setDatalist(products);
+        return obj;
+    }
+
+    /**
+     *
+     * 功能描述: 根据商品id查询商品详情
+     * @auther: wangbin
+     * @date: 2018/8/16/016 16:46
+     */
+    public AbstractOutputDto queryProductByid(Product product) {
+        AbstractOutputDto obj = new AbstractOutputDto();
+        Product product1 =storeDao.queryProductByid(product.getId());
+        obj.setData(product1);
         return obj;
     }
 
@@ -116,7 +129,7 @@ public class StoreService {
      * @auther: wangbin
      * @date: 2018/8/22/022 17:14
      */
-    public List<ValueLabel> queryStoreValueLabelByAppid(int appid) {
+    public List<ValueLabel> queryStoreValueLabelByAppid(String appid) {
         List<ValueLabel> valueLabels = storeDao.queryStoreValueLabelByAppid(appid);
         return valueLabels;
     }

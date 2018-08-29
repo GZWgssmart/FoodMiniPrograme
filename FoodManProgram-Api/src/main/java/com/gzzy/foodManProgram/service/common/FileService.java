@@ -86,4 +86,42 @@ public class FileService {
         return img;
     }
 
+    public Img saveFile1(MultipartFile file, int type) throws FileNotFoundException {
+        // 文件后缀
+        String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
+        //文件名称
+        String realFileName = file.getOriginalFilename();
+        String serialNo = Util.getStrDateForYYYYMMDDHHMMSS(new Date());
+        serialNo = serialNo.substring(0,8);
+        String fileNewName = realFileName+"."+suffix;
+        String imgdirimagepath = ImgUrl.imgdirimage;
+        // 没有文件夹先创建
+        File existfile1 = new File(imgdirimagepath);
+        if (!existfile1.exists()) {// 判断文件是否存在
+            existfile1.mkdirs(); // 创建文件夹
+        }
+
+
+        String srcImgPath = "";
+        String imgurl = "";
+        srcImgPath =  imgdirimagepath + File.separator +realFileName;
+        imgurl = "image" + File.separator + realFileName;
+
+        File record = new File(srcImgPath);
+        Img imgOutput = new Img();
+        try {
+            if(!record.exists()){
+                record.createNewFile();
+            }
+            boolean flag =  HttpClientUtil.doUploadClientforfile(file.getBytes(), record);
+            if(flag){//上传成功
+                imgOutput.setImg("http://127.0.0.1:9009/" + imgurl);
+                imgOutput.setType(type);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return imgOutput;
+    }
+
 }

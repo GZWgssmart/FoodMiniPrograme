@@ -21,7 +21,7 @@ public class Product {
     private BigDecimal price;
     private String des;
     private String img;
-    private int appid;
+    private String appid;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createtime;
@@ -112,11 +112,11 @@ public class Product {
         this.img = img;
     }
 
-    public int getAppid() {
+    public String getAppid() {
         return appid;
     }
 
-    public void setAppid(int appid) {
+    public void setAppid(String appid) {
         this.appid = appid;
     }
 

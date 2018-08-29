@@ -77,6 +77,17 @@ public class StoreController {
         return obj;
     }
 
+    @RequestMapping(value = "/queryProductByid",method = RequestMethod.POST)
+    @ApiOperation(value = "根据商品id查询商品详情",notes = "根据商品id查询商品详情")
+    public AbstractOutputDto querProductByid(@ApiParam(name="根据商品id查询商品详情",value = "传入JSON格式") @RequestBody Product product){
+        AbstractOutputDto obj = new AbstractOutputDto();
+        obj = storeService.queryProductByid(product);
+        obj.setStatus(0);
+        return obj;
+    }
+
+
+
     @RequestMapping(value = "/enableddisable",method = RequestMethod.POST)
     @ApiOperation(value = "启用禁用商铺",notes = "启用禁用商铺")
     public AbstractOutputDto enableddisable(@ApiParam(name="启用禁用商铺",value = "传入JSON格式") @RequestBody Store store){
@@ -90,7 +101,7 @@ public class StoreController {
     @ApiOperation(value = "根据appId查询所有商家",notes = "根据appId查询所有商家")
     public AbstractOutputDto queryStoreValueLabelByAppid(@ApiParam(name="根据appId查询所有商家",value = "传入JSON格式") @RequestBody App app){
         AbstractOutputDto obj = new AbstractOutputDto();
-        List<ValueLabel> valueLabels = storeService.queryStoreValueLabelByAppid(app.getId());
+        List<ValueLabel> valueLabels = storeService.queryStoreValueLabelByAppid(app.getAppid());
         obj.setDatalist(valueLabels);
         return obj;
     }

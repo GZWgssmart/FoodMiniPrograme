@@ -22,7 +22,7 @@ public class Store {
     private String tel;
     private String logo;
     private String video;
-    private int appid;
+    private String appid;
     private String type;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -30,6 +30,10 @@ public class Store {
     private String status;
     private BigDecimal longitude;
     private BigDecimal latitude;
+
+    public void setAppid(String appid) {
+        this.appid = appid;
+    }
 
     private String appname;
 
@@ -115,12 +119,8 @@ public class Store {
         this.video = video;
     }
 
-    public int getAppid() {
+    public String getAppid() {
         return appid;
-    }
-
-    public void setAppid(int appid) {
-        this.appid = appid;
     }
 
     public String getType() {
