@@ -1,12 +1,9 @@
 //app.js
 App({
+  
   onLaunch: function () {
-    wx.setNavigationBarTitle({
-      title: '**美食',
-      success: function (res) { },
-      fail: function (res) { },
-      complete: function (res) { },
-    })
+
+   
 
 /**    
     // 展示本地存储能力
@@ -44,6 +41,6 @@ App({
   },
   globalData: {
     userInfo: null,
-    baseUrl: ""
+    baseUrl: "http://127.0.0.1:9009/"
   }
 })

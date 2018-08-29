@@ -1,4 +1,4 @@
-// pages/map/map.js
+const app = getApp()
 Page({
 
   /**
@@ -8,8 +8,8 @@ Page({
     company: {
       name: '**美食',
       address: '赣州市',
-      longitude: 114.928507,
-      latitude: 25.819923
+      longitude: '',
+      latitude: ''
     },
     markers: []
   },
@@ -32,6 +32,28 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var self = this
+    // 访问后台，把返回的数据设置到 teas 变量
+    wx.request({
+
+      url: app.globalData.baseUrl + 'store/queryStroeProductByAppid',
+      method: 'post',
+      dataType: 'json',
+      data: { 'appid': "app1" },
+      success: function (res) {
+        console.log(res.data.data.products);
+        console.log(res.data.data.store.name);
+        self.setData({
+          company: res.data.data.store,
+          products: res.data.data.products
+        })
+
+        wx.setNavigationBarTitle({
+          title: res.data.data.store.name
+        })
+
+      }
+    })
     this.setData({
       markers: [
         {

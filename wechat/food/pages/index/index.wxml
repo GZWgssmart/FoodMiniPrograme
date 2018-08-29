@@ -1,6 +1,6 @@
 <view>
   <view>
-    <image src="{{company.headicon}}" class="headicon"></image>
+    <image src="{{company.logo}}" class="headicon"></image>
   </view>
   <view class="main-content">
     <view>
@@ -8,9 +8,9 @@
     </view>
     <view>
       <text>热门推荐</text>
-      <view wx:for="{{company.products}}" wx:key="{{item.id}}" class="product" data-productid="{{item.id}}" bindtap="showDetail">
+      <view wx:for="{{products}}" wx:key="{{item.id}}" class="product" data-products="{{item}}" bindtap="showDetail">
         <view>
-          <image src="{{item.headicon}}" class="product-image"></image> 
+          <image src="{{item.img}}" class="product-image"></image> 
         </view>
         <view class="product-info">
           <text class="title">{{item.title}}</text>

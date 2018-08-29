@@ -1,7 +1,7 @@
 <view>
   <view class="product">
     <view>
-      <image src="{{product.headicon}}" class="product-image"></image> 
+      <image src="{{product.img}}" class="product-image"></image> 
     </view>
     <view class="product-info">
       <text class="title">{{product.title}}</text>
@@ -9,5 +9,5 @@
       <text class="price">价格：￥{{product.price}}</text>
     </view>
   </view>
-  <image src="{{product.image}}" class="product-detail-image" mode="widthFix"></image>
+  <image src="{{product.salePrice}}" class="product-detail-image" mode="widthFix"></image>
 </view>

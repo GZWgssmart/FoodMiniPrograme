@@ -7,47 +7,51 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    company: {}
+    company: {},
+    products:[],
+    title:''
   },
 
+
+
   onShow: function() {
-    this.setData({
-      company: {
-        headicon: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534411241219&di=2082082d511e397ce8ec78c7b6c21cb6&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F14%2F61%2F89%2F07k58PICKzr_1024.jpg',
-        video: 'http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400',
-        products: [
-          {
-            id: 1,
-            title: '菜品1',
-            headicon: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534411241219&di=2082082d511e397ce8ec78c7b6c21cb6&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F14%2F61%2F89%2F07k58PICKzr_1024.jpg',
-            price: 2000,
-            des: '非常好！'
-          },
-          {
-            id: 2,
-            title: '菜品2',
-            headicon: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534411241219&di=2082082d511e397ce8ec78c7b6c21cb6&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F14%2F61%2F89%2F07k58PICKzr_1024.jpg',
-            price: 2000,
-            des: '非常好！'
-          }
-        ]
+    var self = this
+    // 访问后台，把返回的数据设置到 teas 变量
+    wx.request({
+      url: app.globalData.baseUrl + 'store/queryStroeProductByAppid',
+      method: 'post',
+      dataType: 'json',
+      data: {'appid':"app1"},
+      success: function (res) {
+        console.log(res.data.data.products);
+        console.log(res.data.data.store.name);
+        self.setData({
+          company: res.data.data.store,
+          products: res.data.data.products
+        })
+
+        wx.setNavigationBarTitle({
+          title: res.data.data.store.name
+        })
+        
       }
     })
+
   },
   showDetail: function(event) {
-    let id = event.currentTarget.dataset.productid
+    var current = event.currentTarget.dataset.products
     wx.navigateTo({
-      url: '../detail/detail?id=' + id,
+      url: '../detail/detail?id=' + current.id + '&img=' + current.img + '&title=' + current.title + '&des=' + current.des + '&price=' + current.price + '&salePrice=' + current.imgdetail,
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},
     })
-  }
-  /** 
+  },
+ 
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
-      url: '../logs/logs'
+      url: 'http:'
     })
   },
   onLoad: function () {
@@ -86,5 +90,5 @@ Page({
       hasUserInfo: true
     })
   }
-  */
+
 })

@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -12,8 +12,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.2.2",
-	"appid": "wxe21a23f3954b4a08",
-	"projectname": "food",
+	"appid": "wx5288444dda63bec2",
+	"projectname": "food1",
 	"isGameTourist": false,
 	"condition": {
 		"search": {
